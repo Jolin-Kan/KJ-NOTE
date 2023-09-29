@@ -29,42 +29,8 @@ char word3 [10]={hello};
 char word4[10]={hello world};
 ```
 
-word3 
+word4 actually has a total of 11 elements > array's effective range ---<font color=red>X</font>
 
+We have to remember that there is a 0 in the end of the string
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-We have to remember that there is a 0 in the end of string
-
-So 
+<font color=yellow>**So the number of string's character <= (array max) -1**</font>
