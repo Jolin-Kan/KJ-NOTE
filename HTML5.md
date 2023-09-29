@@ -10,7 +10,9 @@
 
 ## DOCTYPE statement
 
-<!DOCTYPE> is a necessary part of a web which is at the very beginning of the document(before all the labels) -----> <font color=#ff0000>***avoid the wired mode of the browser.***</font>
+<!DOCTYPE>
+
+ is a necessary part of a web which is at the very beginning of the document(before all the labels) -----> <font color=#ff0000>***avoid the wired mode of the browser.***</font>
 
 ---
 
@@ -21,8 +23,6 @@
 > it is a double label which tells the document is the HTML type.
 > 
 > it also limits the <font size=10>*starting*</font> and ending points of the document
-
-
 
 ### 2.<head></head>
 
