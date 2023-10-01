@@ -284,7 +284,7 @@ int main(){
 
 ---
 
-> > # gets() // scanf() // getchar()
+> > # gets(int) // scanf() // getchar()
 
 > **gets**(char *str); -----> unlimited 
 > 
@@ -293,3 +293,54 @@ int main(){
 > > > <font color=yellow>lacks of bounds checking, and the inability for the calling program to reliably determine the length of the next incoming line,</font>
 > > 
 > > use fgets() instead of gets() in any case.
+
+### putchar(c) has three types of output
+
+1. 当c为一个被单引号（英文状态下）引起来的字符时，输出该字符（注：该字符也可为[转义字符](https://link.zhihu.com/?target=https%3A//baike.baidu.com/item/%25E8%25BD%25AC%25E4%25B9%2589%25E5%25AD%2597%25E7%25AC%25A6)）；
+
+2. 当c为一个介于0~127（包括0及127）之间的十进制整型数时，（**此时没有单引号引起来**）它会被视为对应字符的[ASCII](https://link.zhihu.com/?target=https%3A//baike.baidu.com/item/ASCII)代码，输出该ASCII代码对应的字符
+
+3. 当c为一个事先用char定义好的字符型变量时，（**此时没有单引号引起来**），输出该变量所指向的字符。
+   
+   > ```c
+   > int ch;
+   >     while((ch=getchar())!= EOF)
+   >     {
+   >     	putchar(ch);
+   >     }
+   > return 0;
+   > ```
+   > 
+   >  in this code, ch is a defined string variable\
+   > 
+   > so putchar can output more than one character
+   
+   
+   
+   ---
+   
+   ---
+   
+   ---
+   
+   ## Enumeration
+   
+   >  help to define some names that can be piled up and ordered.
+   > 
+   > like monday -- sunday......
+
+Basic structure //int type
+
+```c
+enum COLOR {red,yellow,green=5} //just like inarray,we can handly initialized
+
+
+```
+
+### Tips:
+
+enum starts from 0, at the end of the enumeration we usually add a "colorofXXX" to reveal how many element are there. Num = enum colorofXXX
+
+
+
+---
