@@ -73,13 +73,13 @@ If we need to rewrite the string we have to use string array
 
 > char word[]="Hello";
 
-### Point or array ? (code 1.or 2.?)
+### Pointer or array ? (code 1.or 2.?)
 
-- **point** ---> to process a string
+- **pointer** ---> to process a string
   
   - process parameters(參數)；
   
-  - if the space of string is got by 'malloc'/(<font color=red>dynamic allocation of space</font>), you need to use point to handle the string.
+  - if the space of string is got by 'malloc'/(<font color=red>dynamic allocation of space</font>), you need to use pointer to handle the string.
 
 - **array** ---> to form a string 
 
@@ -122,7 +122,7 @@ So <font color=red>"%7s"</font> is used to limit the size of string the program 
 
 1. <font color=pink>**the difference between $getchar$ & $printf$ ; $putchar$ & $scanf$**</font>
 
-> $scanf$ and $printf$ can process more than one string/data at the same time
+> $scanf$ and $printf$ can process more than one character/data at the same time
 > 
 > > But putchar and getchar works character by character 
 
@@ -145,7 +145,7 @@ here is two way of representing a string array:
 
 #### No.1
 
-it means we have a point called string and this point(string) point to another point.That point point to a character/string.
+it means we have a pointer called string and this point(string) point to another point.That point point to a character/string.
 
 #### No.2
 
@@ -163,7 +163,7 @@ int main(int argc,char const *argv[])
 
 > argc means the number of the parameters .
 > 
-> argv[] is a point array which point to every parameter in the main function.
+> argv[] is a pointer array which point to every parameter in the main function.
 
 ---
 
@@ -172,8 +172,6 @@ int main(int argc,char const *argv[])
 > because string can be represented by two ways
 > 
 > > so the function can also be written by two ways
-
-
 
 1. ### **strlen** (const char *s)-----> to know the length of string
 
@@ -196,8 +194,6 @@ int main(int argc,char const *argv[])
 > }
 > return idx;
 > ```
-
-
 
 2. ### strcmp(const char *s1, const char *s2) // compare, no need to rewrite
 
@@ -284,4 +280,16 @@ int main(){
 }
 ```
 
-> > gets() // scanf() // getchar()
+---
+
+---
+
+> > # gets() // scanf() // getchar()
+
+> **gets**(char *str); -----> unlimited 
+> 
+> > **fgets**() and **gets**() return a pointer to the string
+> > 
+> > > <font color=yellow>lacks of bounds checking, and the inability for the calling program to reliably determine the length of the next incoming line,</font>
+> > 
+> > use fgets() instead of gets() in any case.
