@@ -63,3 +63,83 @@
 >     </body>
 > </html>    
 > ```
+
+
+
+
+
+## Title label ----> <h1>****</h1>
+
+Title has six level; 1~6
+
+```html
+<body>
+<h1>title 1</h1>
+<h2>title 2</h2>
+.....
+
+<h6>title 6</h6>
+</body>
+```
+
+> we can change the location of title by changing its attribute of  <font color=red>align</font>.
+> 
+> ```html
+>     <h1 align="center"> title center </h1>
+> ```
+
+![](/Users/jolin/Pictures/md.pic.library/title%20label.png)
+
+
+
+## paragraph  / break / horizon line --- label
+
+1. paragraph label <p></p>
+   
+   > double label 
+
+2. break label <br/>
+
+```html
+<p>I am a paragraph label</p>
+<p> I want to show you about the effect
+of break label <br/> in the paragraph label</p>
+```
+
+![](/Users/jolin/Pictures/md.pic.library/<p>:<br>.png)
+
+<font color=pink>break label ----> line break during a paragraph</font>
+
+3.Horizon line <hr/>
+
+the attribute of <font color=yellow>color width size align</font> is changeable
+
+> size also means height 
+> 
+> width size ----> XXX px (pixel)
+
+```html
+<hr color="pink" width ="300px" size="10px" align="right">
+```
+
+> * align only has two adjusting mode (left/right)
+> 
+> * because it defaults to be in center.
+
+ 
+
+## image label -----> single label
+
+has five attributes we can change
+
+- src : source road /// <font color=yellow>the ima and the html doc must be i n the same folder</font> 
+
+- alt: the img's name. when the img fail to display, browser will show alt name.
+
+- title: the tips about the img when mouse float on the img will show.
+
+    ![](/Users/jolin/Pictures/md.pic.library/img%20alt%20title.png)
+
+- width / height : we usually change only one.
+
+- > If we do not modify according to the image scale, it will cause stretching and distortion of the image
