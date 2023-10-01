@@ -83,8 +83,6 @@ If we need to rewrite the string we have to use string array
 
 - **array** ---> to form a string 
 
-
-
 ## string's print & scan
 
 > I will use some example to illustrate some ways of printing/scanning string
@@ -101,8 +99,6 @@ s = t ;
 
 It doesn't create a new string and actually t and s point to the same address
 
-
-
 ### 2. scan and print
 
 ```c
@@ -112,7 +108,6 @@ scanf("%s", string); //scanf("%7s", tring);
 scanf("%s", word); //scanf("%7s", word);
 printf("%s\n", string);
 printf("%s\n", string);
-
 ```
 
 > Notice: scanf () only scan a 'word' <font color=green>(divided by empty, tab or enter)</font> once.
@@ -123,9 +118,7 @@ If it needs to scan only one string and we enter more than one, the rest of the 
 
 So <font color=red>"%7s"</font> is used to limit the size of string the program scan. If we enter a string bigger than the size required, the program will scan as much as it can and the rest will be scanned to the next string array or just being ignored.
 
-
-
-### $ getchar$ & $putchar$ -----> string function with $<string.h>$
+### $ getchar$ (void)& $putchar$ (int) -----> string function with $<string.h>$
 
 1. <font color=pink>**the difference between $getchar$ & $printf$ ; $putchar$ & $scanf$**</font>
 
@@ -139,9 +132,7 @@ So <font color=red>"%7s"</font> is used to limit the size of string the program 
 
 because space is regarded as a character.
 
----
-
----
+--- ---
 
 ## How to represent a string array
 
@@ -161,3 +152,136 @@ it means we have a point called string and this point(string) point to another p
 its similar to a <u>***two-dimensional array***</u> 
 
 it means there is a array and each elements of the array have the capacity of 10 character.
+
+---
+
+# <font color=red>Notice:</font>  'int main()' actually has something in parentheses
+
+```c
+int main(int argc,char const *argv[])
+```
+
+> argc means the number of the parameters .
+> 
+> argv[] is a point array which point to every parameter in the main function.
+
+---
+
+## function in the <string.h>
+
+> because string can be represented by two ways
+> 
+> > so the function can also be written by two ways
+
+
+
+1. ### **strlen** (const char *s)-----> to know the length of string
+
+> > ```c
+> > //count,no need to rewrite ---> CONST
+> > strlen(string);
+> > sizeof(string);
+> > ```
+
+<font color=pink>"sizeof" has no business with the length of string</font>
+
+> write our own strlen function:
+> 
+> ```c
+> int cnt=0;
+> int idx=0;
+> while(s[idx] != '\0')
+> {
+>     idx++;
+> }
+> return idx;
+> ```
+
+
+
+2. ### strcmp(const char *s1, const char *s2) // compare, no need to rewrite
+
+>  compare the string's size
+> 
+> the result is subtraction of the two string's address
+
+```c
+strcmp(s1,s2);
+
+
+while(s1[idx]==s2[idx]&&s1[idx] != '\0')
+{
+    idx++;
+}
+return s1[idx]-s2[idx];
+
+
+while(*s1==*s2&& *s1!='\0')
+{
+    s1++;
+    s2++;
+}
+return *s1-*s2;
+```
+
+3. ### char* strcpy(char* restrict dst, const char* restrict src)
+   
+   > > <font color=yellow>copy src to dst</font>
+
+```c
+while(src[idx] != '\0')
+{
+    dst[idx]=src[idx]
+    idx++
+}
+dst[idx]= '\0'
+return dst;
+```
+
+> how we use it?
+> 
+> when we copy a string, we have to create a empty space that can contains the string we need to copy -----> <font color=pink>malloc</font> /old friend/
+> 
+> ```c
+> char *dst = (char*)malloc(strlen(src)+1);
+> strcpy(dst,src);
+> ```
+
+4. ### char* strchr(const char*s, int c); // search from left
+
+### char* strrchr(const char*s, int c); //search from right
+
+> search a character in a string // strchr() will tell us the address of the first character we ask to search.
+> 
+> ```c
+> char s[]="Hello";
+> char *p= strchr(s,'l');
+> p=strcgr(p+1,'l');//search the other 'l' during s
+> 
+> char c = *р;
+> *р = "10';
+> char *t = (char*) malloc(strlen (s)+1);
+> strcpy(t, s);
+> printf("&s\gh
+> t)
+> free(t); //print the spring before 'l'
+> ```
+
+5. ### strcat()----> connect/combine two strings
+
+```c
+#include <stdio.h>
+#include <string.h>
+int main(){
+    char str1[101] = { 0 };
+    char str2[50] = { 0 };
+    gets(str1);
+    gets(str2);
+    strcat(str1, str2);
+    puts(str1);
+
+    return 0;
+}
+```
+
+> > gets() // scanf() // getchar()
