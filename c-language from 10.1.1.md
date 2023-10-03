@@ -306,7 +306,7 @@ int main(){
    > int ch;
    >     while((ch=getchar())!= EOF)
    >     {
-   >     	putchar(ch);
+   >         putchar(ch);
    >     }
    > return 0;
    > ```
@@ -314,33 +314,153 @@ int main(){
    >  in this code, ch is a defined string variable\
    > 
    > so putchar can output more than one character
-   
-   
-   
+
    ---
-   
+
    ---
-   
+
    ---
-   
-   ## Enumeration
-   
-   >  help to define some names that can be piled up and ordered.
-   > 
-   > like monday -- sunday......
+
+## Enumeration
+
+>  help to define some names that can be piled up and ordered.
+> 
+> like monday -- sunday......
 
 Basic structure //int type
 
 ```c
-enum COLOR {red,yellow,green=5} //just like inarray,we can handly initialized
-
-
+enum COLOR {red,yellow,green=5} //just like array,we can handly initialized
 ```
 
 ### Tips:
 
 enum starts from 0, at the end of the enumeration we usually add a "colorofXXX" to reveal how many element are there. Num = enum colorofXXX
 
-
-
 ---
+
+# **struct**
+
+there is three forms to declare a struct
+
+> <font color=pink>name is no necessary</font> 
+
+```c
+struct date{
+    int year;
+    int month;
+    int day;
+};
+struct date today,tomorrow;
+
+
+struct {
+    int year;
+    int month;
+    int day;
+}today,tomorrow; // only define two variable rather than a struct
+
+
+struct date{
+    int year;
+    int month;
+    int day;
+}roday,tomorrow;
+```
+
+### struct member
+
+<font color=yellow>we also have different ways to initialized the struct member</font> 
+
+```c
+struct date{
+    int year;
+    int month;
+    int day;
+};
+struct date today={2023,10,3};
+struct date tomorrow={2023,10,4};
+struct date aday={.year=2023,.day=23};
+
+struct date oneday;
+oneday.year=2023;
+oneday.month=11;
+oneday.day=22;
+
+
+
+```
+
+1. initialize like array does
+   
+   > initialize in order. If not initialized, it defaults to 0;
+
+2. initialize it one by one;
+
+> '.' "運算符"
+> 
+> connects struct and struct member
+
+### struct caculate
+
+```c
+struct 
+{
+    int x;
+    int y;
+}p1,p2;
+
+p1=(struct){10,5}; ------> p1.x=10; p1.y=5
+p1=p2; -----> p1.x=p2.x;  p1.y=p2.y
+```
+
+### struct and function
+
+> we can <font color=yellow>assign values</font> from struct to struct
+> 
+> > arguments are passed between function <font color=yellow>as Values</font> 
+
+
+
+E.g.1:
+
+![](/Users/jolin/Pictures/md.pic.library/struct&function1.png)
+
+Structs are assigned inside a function and cannot <font color=green>be taken out to the other function</font> for output <font color=red>[[  because Arguments are passed as values  ]]</font> 
+
+solution for passing struct:
+
+1. copy the whole struct
+
+2. use a pointer
+
+
+
+Obviously use a pointer is more <font color=pink>efficient.</font> 
+
+#### For example:
+
+![](/Users/jolin/Pictures/md.pic.library/struct&function2.png)
+
+focus on the function "getstruct" it return a address which point to a struct by which way we can extract the struct from the pointer in any function.
+
+> that means we can pass the struct between functions without modifying its value.
+
+### <font color=red>-></font> similar to '<font color=red>**.**</font>'
+
+> to represent the member of the struct that a pointer pointy to
+> 
+> ```c
+> struct date
+> {
+>     int year;
+>     int month;
+> }myday;
+> struct date *p = &mydate;
+> p->month=12;//1
+> (*p).month=12;//2
+> ```
+> 
+> 1 & 2 has the same meaning
+
+### struct in struct
