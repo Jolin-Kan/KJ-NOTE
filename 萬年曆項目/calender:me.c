@@ -5,19 +5,20 @@ int fdayofmo(int year,int month,int day)    //根據互聯網搜索蔡勒公式�
 {
    if(year>1583 && month > 9)
                         {
-                            if(day>3)
+                            if(day>4)
                             {
-                                return (day + 1 + (2 * month) + ((13 * (month + 1)) / 5) + year + (year / 4) - (year / 100) + (year / 400)) % 7;
+                                return (((year/100)/4)-2*(year/100)+((13*(month+1))/5)+day+1)%7;
+                                
                             }  
                              else 
                         {
-                            return (day + 1 + (2 * month) + ((13 * (month + 1)) / 5) + year + (year / 4) + 5) % 7;
-                        }   
+                            return (((year/100)/4)-2*(year/100)+year+(year/4)+((13*(month+1))/5)+day-2)%7;
+                        }  
                         //
                         }      
                         else 
                         {
-                            return (day + 1 + (2 * month) + ((13 * (month + 1)) / 5) + year + (year / 4) + 5) % 7;
+                            return (((year/100)/4)-2*(year/100)+year+(year/4)+((13*(month+1))/5)+day-2)%7;
                         }    
 }
 
@@ -104,9 +105,10 @@ int main(int agrc, const char* agrv[])
                         }  
                         
                         day=1;
-                        /////        //計算當月第一天是星期幾，便於畫日曆
+                                    //計算當月第一天是星期幾，便於畫日曆
                         printf("%d-%d-%d\n", year,month,day); 
                         int fdayofm = fdayofmo(year,month,day); 
+                        printf("#%d\n", fdayofm);
 
                         switch(fdayofm) //第一天的星期數 決定第一次print的格式
                         {
