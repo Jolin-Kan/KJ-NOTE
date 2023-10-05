@@ -64,10 +64,6 @@
 > </html>    
 > ```
 
-
-
-
-
 ## Title label ----> <h1>****</h1>
 
 Title has six level; 1~6
@@ -89,8 +85,6 @@ Title has six level; 1~6
 > ```
 
 ![](/Users/jolin/Pictures/md.pic.library/title%20label.png)
-
-
 
 ## paragraph  / break / horizon line --- label
 
@@ -126,8 +120,6 @@ the attribute of <font color=yellow>color width size align</font> is changeable
 > 
 > * because it defaults to be in center.
 
- 
-
 ## image label -----> single label
 
 has five attributes we can change
@@ -143,3 +135,26 @@ has five attributes we can change
 - width / height : we usually change only one.
 
 - > If we do not modify according to the image scale, it will cause stretching and distortion of the image
+
+- we can also add some margin between img
+  
+  > there is two ways
+  > 
+  > css & inside edit 
+
+```html
+.image {
+    margin-right: 10px; /* 添加右侧间隔 */
+}
+
+
+```
+
+```html
+<img src="image1.jpg" style="margin-right: 10px;">
+<img src="image2.jpg" style="margin-right: 10px;">
+<img src="image3.jpg" style="margin-right: 10px;">
+
+```
+
+Attribute of <font color=red>style</font> 

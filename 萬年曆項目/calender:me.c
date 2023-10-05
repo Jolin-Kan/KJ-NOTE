@@ -3,34 +3,23 @@
 
 int fdayofmo(int year,int month,int day)    //根據互聯網搜索蔡勒公式判斷某一天是星期幾
 {
-   if(year>1583 && month > 9)
-                        {
-                            if(day>4)
-                            {
-                                return (((year/100)/4)-2*(year/100)+((13*(month+1))/5)+day+1)%7;
-                                
-                            }  
-                             else 
-                        {
-                            return (((year/100)/4)-2*(year/100)+year+(year/4)+((13*(month+1))/5)+day-2)%7;
-                        }  
-                        //
-                        }      
-                        else 
-                        {
-                            return (((year/100)/4)-2*(year/100)+year+(year/4)+((13*(month+1))/5)+day-2)%7;
-                        }    
+   if (month < 3) {
+        month += 12;
+        year--;
+    }
+    int wd = (1+day + 2 * month + 3 * (month + 1) / 5 + year + year / 4 - year / 100 + year / 400) % 7;
+    return wd;
 }
 
 
 
 int main(int agrc, const char* agrv[])
 {
-	int year, month, date,day;
+	int year, month,day;
     int choice; //紀錄用戶的選擇
 
     
-        printf("==== 萬年曆菜單 ====\n");
+        printf("<===== 萬年曆菜單 =====>\n");
         printf("1. 顯示日曆\n");
         printf("2. 退出\n");
         printf("（只需要輸入1或2）\n");
@@ -48,7 +37,7 @@ int main(int agrc, const char* agrv[])
         	printf("請輸入天數：");
         	scanf("%d",&day);
 
-            int oday=day; //儲存輸入的天數
+            int oday=day; //儲存用戶輸入的天數
 
         	if(year>0)
         	{
@@ -58,7 +47,7 @@ int main(int agrc, const char* agrv[])
         			{
         				int daysofmonth=0;
                         int monthsday[]={0,31,28,31,30,31,30,31,31,30,31,30,31};
-                        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+                        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) //判斷月份天數，用於後續循環
                         {
                             if(month==2)
                             {
@@ -78,6 +67,7 @@ int main(int agrc, const char* agrv[])
                         printf("there is %d days in this month\n", daysofmonth);
                         printf("%d-%d-%d\n", year,month,day);
                          int dayofm = fdayofmo(year,month,day);    //引用自定函數計算當天是星期幾
+                         printf("#%d\n", dayofm);
 
                         switch(dayofm)
                         {
@@ -104,8 +94,8 @@ int main(int agrc, const char* agrv[])
                             break;
                         }  
                         
-                        day=1;
-                                    //計算當月第一天是星期幾，便於畫日曆
+                        day=1;  //計算當月第一天是星期幾，便於畫日曆
+                                    
                         printf("%d-%d-%d\n", year,month,day); 
                         int fdayofm = fdayofmo(year,month,day); 
                         printf("#%d\n", fdayofm);
@@ -134,19 +124,122 @@ int main(int agrc, const char* agrv[])
                             printf("The day of the first date is saturday\n");
                             break;
                         }
-                        day=oday;
+                        day=oday; 
 
                     printf("== 日  一  二  三  四  五  六 ==\n");
-                    //*
-                    int cnt=0,i=1;
-                    while(cnt<((3*fdayofm)+4)) //空格輸入數量公式
+                    
+                    int cnt = 0, i = 1;
+                    while (cnt < ((4 * fdayofm) + 3))
                      {
                         printf(" ");
                         cnt++;
                      }
-                     printf("%d",i);
-                     //*
-        			}
+                    printf("%d", i);//輸入第一個數字
+            //=======================================
+
+                    
+                    if(fdayofm==6) //第一天是六的要先換行再執行循環
+                     {
+                                        printf("\n");
+                                        fdayofm = -1;
+
+                                        for (i = 2; i < (daysofmonth + 1); i++) 
+                                    {//
+                                        if (i == day) 
+                                        {
+                                            if (day > 9) 
+                                            {
+                                                printf(" *%d", i);
+                                                fdayofm++;
+                                            } 
+                                            else 
+                                              {
+                                                printf("  *%d", i);
+                                                fdayofm++;
+                                              }
+                                        } 
+                                        else 
+                                        {
+                                            if (fdayofm == 6) 
+                                            {
+                                                printf("\n");
+                                                dayofm = -1;
+                                                printf("  %2d", i);
+                                                fdayofm++;
+                                                if (fdayofm == 6) 
+                                                {
+                                                    fdayofm = -1;
+                                                    printf("\n");
+                                                } 
+                                                else{}
+                                                
+                                            } 
+                                        
+                                            else 
+                                            {
+                                                printf("  %2d", i);
+                                                fdayofm++;
+
+                                                if (fdayofm == 6) 
+                                                {
+                                                    fdayofm = -1;
+                                                    printf("\n");
+                                                }
+                                            }
+                                        }
+                                    }
+                                } 
+
+
+                    else
+                    {
+                            for (i = 2; i < (daysofmonth + 1); i++) 
+                            {//
+                                if (i == day) 
+                                {
+                                    if (day > 9) 
+                                    {
+                                        printf(" *%d", i);
+                                        fdayofm++; //一開始漏了這個，導致凡是有*的那一行都多一個
+                                    } 
+                                    else 
+                                      {
+                                        printf("  *%d", i);
+                                        fdayofm++;
+                                      }
+                                } 
+                                else 
+                                {
+                                    if (fdayofm == 6) 
+                                    {
+                                        printf("\n");
+                                        dayofm = -1;
+                                        printf("  %2d", i);
+                                        fdayofm++;
+                                        if (fdayofm == 6) 
+                                        {
+                                            fdayofm = -1;
+                                            printf("\n");
+                                        } 
+                                        else{}
+                                        
+                                    } 
+                                
+                                    else 
+                                    {
+                                        printf("  %2d", i);
+                                        fdayofm++;
+
+                                        if (fdayofm == 6) 
+                                        {
+                                            fdayofm = -1;
+                                            printf("\n");
+                                        }
+                                    }
+                                }
+                            }
+                        } 
+                    }
         		else
         		{
         			printf("error");
@@ -168,6 +261,4 @@ int main(int agrc, const char* agrv[])
         }
         return 0;
         
-
-
-}
+ }

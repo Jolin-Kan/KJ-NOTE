@@ -134,24 +134,47 @@ because space is regarded as a character.
 
 --- ---
 
-## How to represent a string array
+## How to represent a <font color=yellow>string array</font> = string's pointer array
+
+> > it means <font color=pink>there is a array whose elements are pointer and those pointers point to a character so that it forms a string array</font> 
+
+> string actually is a <string array> 
 
 ```c
-1. char **string;
-2. char [][10];
+1. char* *string;
+2. char a[][10];
+3. char* a[]; 
+4. char* string[10];
+
 ```
 
 here is two way of representing a string array:
 
 #### No.1
 
-it means we have a pointer called string and this point(string) point to another point.That point point to a character/string.
+1. char* ----> pointer point to character
+
+2. char** ----> a pointer point to another pointer == form an array
+
+it means we have a pointer called string and this pointer(string) point to another pointer.That pointer point to a character. 
+
+
+
+look at 1&3: 
+
+
 
 #### No.2
 
 its similar to a <u>***two-dimensional array***</u> 
 
 it means there is a array and each elements of the array have the capacity of 10 character.
+
+#### No.3/4
+
+ a is a array and its elements are pointers that point to character 
+
+
 
 ---
 
@@ -314,11 +337,11 @@ int main(){
    >  in this code, ch is a defined string variable\
    > 
    > so putchar can output more than one character
-
+   
    ---
-
+   
    ---
-
+   
    ---
 
 ## Enumeration
@@ -386,9 +409,6 @@ struct date oneday;
 oneday.year=2023;
 oneday.month=11;
 oneday.day=22;
-
-
-
 ```
 
 1. initialize like array does
@@ -420,8 +440,6 @@ p1=p2; -----> p1.x=p2.x;  p1.y=p2.y
 > 
 > > arguments are passed between function <font color=yellow>as Values</font> 
 
-
-
 E.g.1:
 
 ![](/Users/jolin/Pictures/md.pic.library/struct&function1.png)
@@ -433,8 +451,6 @@ solution for passing struct:
 1. copy the whole struct
 
 2. use a pointer
-
-
 
 Obviously use a pointer is more <font color=pink>efficient.</font> 
 
@@ -464,3 +480,55 @@ focus on the function "getstruct" it return a address which point to a struct by
 > 1 & 2 has the same meaning
 
 ### struct in struct
+
+```c
+struct point
+{
+    x;
+    y;
+};
+
+struct rpoint
+{
+    struct point pt1;
+    struct point pt2;
+};
+
+struct rpoint r,*rp;
+r.pt1.x    /    r.pt1.y
+r.pt2.x    /    r.pt2.y
+
+
+rp=&r;
+r.pt1.x == rp->pt1.x
+//no  rp->pt1->x
+pt1 is not a pointer
+```
+
+---
+
+---
+
+---
+
+
+
+## Typedef + <original type> + <new name>
+
+> > Find <font color=red>the last word</font>  to distinguish!!!!
+
+Typedef int length;
+
+> // we can use 'length' to define int variable
+
+Typedef char* string[10];
+
+> // string represent a string array that has 10 elements
+> 
+> string a; // means a is a string array that has 10 elements
+
+Typedef struct node anode;
+
+> struct node a == anode a;
+
+---
