@@ -145,7 +145,6 @@ because space is regarded as a character.
 2. char a[][10];
 3. char* a[]; 
 4. char* string[10];
-
 ```
 
 here is two way of representing a string array:
@@ -158,11 +157,7 @@ here is two way of representing a string array:
 
 it means we have a pointer called string and this pointer(string) point to another pointer.That pointer point to a character. 
 
-
-
 look at 1&3: 
-
-
 
 #### No.2
 
@@ -173,8 +168,6 @@ it means there is a array and each elements of the array have the capacity of 10
 #### No.3/4
 
  a is a array and its elements are pointers that point to character 
-
-
 
 ---
 
@@ -511,8 +504,6 @@ pt1 is not a pointer
 
 ---
 
-
-
 ## Typedef + <original type> + <new name>
 
 > > Find <font color=red>the last word</font>  to distinguish!!!!
@@ -532,3 +523,39 @@ Typedef struct node anode;
 > struct node a == anode a;
 
 ---
+
+## 1. Global variable & Static Global variable
+
+## 2. Local variable & Static Local variable
+
+Global & Local
+
+> **the variable defined in a function is called 'Local variable'**
+> 
+> when getting out the function the variable will disappear(the address will be assigned for other variables)
+> 
+> > **the variable defined out of the function is called global variable**
+> > 
+> > the variable will only be initialized once
+
+### Static
+
+> Static means a variable will exist forever.
+> 
+> if we have a static local variable 
+> 
+> ```c
+> static int i;
+> ```
+> 
+> 'i' 's address will be kept forever even if the function i below is done.
+
+---
+
+## Macro-define(宏定義)/ #define
+
+> kind of <font color=red>**Compile preprocessor instruction**</font> /(編譯預處理指令)
+> 
+> is not the part of the C language
+
+# 
