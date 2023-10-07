@@ -557,5 +557,71 @@ Global & Local
 > kind of <font color=red>**Compile preprocessor instruction**</font> /(編譯預處理指令)
 > 
 > is not the part of the C language
+> 
+> >  its actually to replace something
 
-# 
+# #define A B
+
+> when running the code, the <font color=yellow>compiler</font> will find <font color=red>all</font> the A in code and replace with B
+
+Example:
+
+```c
+#include <stdio.h>
+#define PI 3.14159
+
+
+int main()
+{
+    printf("%f", PI*4)
+/* the result of the program is 
+    3.14159*4*/
+}
+```
+
+## <font color=pink>Macro-define with parameter</font>
+
+> actually we can assign parameter in Macro-define
+> 
+> > Basically its just like function,we can <font color=green>write a function</font> with Macro-define
+> > 
+> > Western programmer will do so but eastern programmer do not.
+
+```c
+//Here is some wrong example:
+1.#define A(x) (x*300)
+2.#define A(x) (x)*300
+
+printf("%d", A(5+2));==> 5+2*300
+printf("%d",10/A(7));==> 10/7*300
+```
+
+### Some principles of Macro-define with parameters
+
+- Everything needs parentheses
+  
+  -  the parameter needs parentheses 
+  
+  - the value needs parentheses
+
+- we can have more than one parameters
+
+- we can also have nested Macro-define
+
+- do not add ';' in the end of the Macro-define
+
+- ### '/'    '//'    '#'    '##'
+
+```c
+1. #define AAA printf("Hello") /
+2.            printf("world")
+3. //'/' means the Macro-define didn't end. Line 1&2 is in one Macro-define
+
+4.#define AAAA printf("fuck")
+5.             printf("up")
+6. //without a '/' is not available. the code in line5 is regarded as empty instruction
+```
+
+'#'    turn parameter below into character ----> to print
+
+'##' to connect front and backyard parameters
