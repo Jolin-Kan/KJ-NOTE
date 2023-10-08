@@ -600,7 +600,7 @@ printf("%d",10/A(7));==> 10/7*300
 
 - Everything needs parentheses
   
-  -  the parameter needs parentheses 
+  - the parameter needs parentheses 
   
   - the value needs parentheses
 
@@ -624,4 +624,68 @@ printf("%d",10/A(7));==> 10/7*300
 
 '#'    turn parameter below into character ----> to print
 
-'##' to connect front and backyard parameters
+'##' to connect front and backyard parameters  
+
+
+
+## Final step
+
+> it includes some <font color=yellow>advance and primitive</font> thing in computer and C
+> 
+> And those are not so urgent for me to understand or use it
+> 
+> > so I will briefly choose something I can understand well and I think is necessary to mark down
+
+
+
+### 源代碼文件  /  head file(頭文件)
+
+> In some case, we define or use lots of functions and make the code too redundant(冗雜的) so that its not good for modifying the code & reading
+> 
+> > **and we know the "<stdio.h>" is one of the <font color=red>stander repository</font> of C **
+> > 
+> > **the repository includes abundant functions**
+> 
+> So we can write our own repository and store them with the original code
+> 
+> that's called <font color=yellow>project</font>
+> 
+>  // the specific implementation is not included in this note
+
+
+
+### The format of ***print*** and ***scan***
+
+printf ----> "%[flags] {[width]/[.prec]} [hlL]type"
+
+![](/Users/jolin/Pictures/md.pic.library/flag...png)
+
+> > No '-'    default align to right
+> > 
+> > (+-%d) /(-+%d) means need a sign and align to left at the same time 
+
+![](/Users/jolin/Pictures/md.pic.library/pre.png)
+
+> > ("%9.2f")  means the float totally takes up 9 characters and there is two characters after the '.'
+> > 
+> > "_ _ _ _ _99.23"
+
+![](/Users/jolin/Pictures/md.pic.library/print%20type.png)
+
+> I mentioned before so just review it.
+
+Scanf ---> %[flag]type
+
+![](/Users/jolin/Pictures/md.pic.library/scan%20type.png)
+
+> learn it by heart
+
+
+
+## printf & scanf actually return something!!!
+
+- the number of items it reads
+
+- the number of character it print
+  
+  > 不要忘記<font color=yellow>逃逸字符</font> 如'\n' return

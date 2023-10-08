@@ -18,7 +18,7 @@ For example: we have a Abstract view about a TV
 > 
 > > but we don't care how the TV works by,or which manufacture produce it
 
-So ADT is a general project/idea
+So ADT is a general project / idea
 
 > another example: 
 > 
@@ -38,6 +38,44 @@ So ADT is a general project/idea
 
 when it comes to achieve it, we can use different ways with programing language to make it.
 
-
-
 ## linked list:
+
+![](/Users/jolin/Pictures/md.pic.library/linked%20list.png)
+
+> As we can see :
+> 
+> every elements of the linked list will store a data & a pointer
+
+# linked list & dynamic array
+
+## Advantages of linked list
+
+1. **Dynamic RAM assign**: no need to assign memory before enter data
+
+2. **Discontinuous storage**: elements are stored in different location in memory. No contiguous blocks of memory are required.//
+
+3. **Easy to modify elements**
+
+## Disadvantages of L&L
+
+1. **Not supporting random access**: get access to one element,you have to go through all the elements before ---- O(n);
+
+2. Require additional performance 
+
+
+
+---
+
+## Advantages of D-array
+
+1. **Access to the element quickly**:  no need to go through the O(1)
+
+
+
+## Disadvantage of D-array
+
+1. **Fixed storage** : when you want to add a elements and the array is just full,you have to create a larger array and copy all the elements down.
+
+2. **Complex implementation** of modifying elements:have to move major elements
+
+---
