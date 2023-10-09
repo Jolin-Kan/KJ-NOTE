@@ -377,11 +377,7 @@ struct {
 }today,tomorrow; // only define two variable rather than a struct
 
 
-struct date{
-    int year;
-    int month;
-    int day;
-}roday,tomorrow;
+ 
 ```
 
 ### struct member
@@ -626,8 +622,6 @@ printf("%d",10/A(7));==> 10/7*300
 
 '##' to connect front and backyard parameters  
 
-
-
 ## Final step
 
 > it includes some <font color=yellow>advance and primitive</font> thing in computer and C
@@ -635,8 +629,6 @@ printf("%d",10/A(7));==> 10/7*300
 > And those are not so urgent for me to understand or use it
 > 
 > > so I will briefly choose something I can understand well and I think is necessary to mark down
-
-
 
 ### 源代碼文件  /  head file(頭文件)
 
@@ -651,8 +643,6 @@ printf("%d",10/A(7));==> 10/7*300
 > that's called <font color=yellow>project</font>
 > 
 >  // the specific implementation is not included in this note
-
-
 
 ### The format of ***print*** and ***scan***
 
@@ -679,8 +669,6 @@ Scanf ---> %[flag]type
 ![](/Users/jolin/Pictures/md.pic.library/scan%20type.png)
 
 > learn it by heart
-
-
 
 ## printf & scanf actually return something!!!
 

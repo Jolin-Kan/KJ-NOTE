@@ -62,15 +62,11 @@ when it comes to achieve it, we can use different ways with programing language 
 
 2. Require additional performance 
 
-
-
 ---
 
 ## Advantages of D-array
 
 1. **Access to the element quickly**:  no need to go through the O(1)
-
-
 
 ## Disadvantage of D-array
 
@@ -79,3 +75,56 @@ when it comes to achieve it, we can use different ways with programing language 
 2. **Complex implementation** of modifying elements:have to move major elements
 
 ---
+
+## Make a L&L in C
+
+> as we know every elements of the L&L have two part-->data/pointer
+> 
+> we can use <font color=yellow>strcture</font>
+
+```c
+struct Node 
+{
+    int data;
+    struct node* next; //point to node, so need to include a data-->struct
+};
+struct node* head; //declare a head node to represent a LL
+head = NULL; //its a empty ll
+
+
+struct node* temp=(strcut node*)malloc(sizeof(struct node)
+// create a block memory for entering data
+temp->data=2;
+temp->next=NULL; //add 2 into the ll
+head =temp; //let the head node point to the first element
+
+
+/*add elements to the end of ll:
+to the end means we need to go through the ll
+so we can use (*head==NULL) to adjust if its the end of ll*/
+// 添加数字到链表末尾
+void append(struct Node** head, int num)
+ {
+    // 创建新结点
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = num;
+    newNode->next = NULL;
+
+    // 如果链表为空，将新结点作为头结点
+    if (*head == NULL) 
+    {
+        *head = newNode;
+        return;
+    }
+
+    // 否则遍历至链表末尾
+    struct Node* temp = *head;
+    while (temp->next != NULL) 
+     {
+        temp = temp->next;
+    }
+
+    // 将新结点添加到链表末尾
+    temp->next = newNode;
+}
+```
