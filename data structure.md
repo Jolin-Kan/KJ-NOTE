@@ -96,6 +96,43 @@ here is a way to go through the linked list
 
 Hard to express, so linked list have a static structure
 
+
+
+## Basic code structure of linked list
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+} Node;
+
+void insert(int data, int n);
+void print();
+
+Node *head = NULL; //emppty linked list
+
+int main()
+{
+    insert(2, 1); // 链表：2
+    insert(4, 2); // 链表：2 4
+    insert(6, 1); // 链表：6 2 4
+    insert(8, 3); // 链表：6 2 8 4
+    insert(10, 5); // 链表：6 2 8 4 10
+
+    print();
+
+    return 0;
+}
+```
+
+> insert function will varies by the aim
+
+---
+
 here is different example
 
 > add to front
@@ -107,13 +144,13 @@ here is different example
 
 typedef struct _node
 {
-	int data;
-	struct _node *next;
+    int data;
+    struct _node *next;
 }node;
 
 typedef struct _List
 {
-	node *head;
+    node *head;
   //node *tail;
 }List;   // we use a brand new data type to represent the whole Linked-list 
 
@@ -123,35 +160,35 @@ void printList(List* plist);
 
 int main(int argc, char const *argv[])
 {
-	
-	 List list;
-	 list.head=NULL;
+
+     List list;
+     list.head=NULL;
    //List.tail=NULL;
 
-	 int i,n,num,x;										 //
-	 printf("How many numbers do you want to enter?\n"); //
-	 scanf("%d", &n);									 //
-	 
-	 for(i=0;i<n;i++)
-	 {
-	 	printf("What's the number?\n");
-		scanf("%d", &x);
-		if(i==(n-1))
-			{
-				printf("\n");
-			}
-		insertfront(&list,x);
-	 	
-	 };
-	 printList(&list);
+     int i,n,num,x;                                         //
+     printf("How many numbers do you want to enter?\n"); //
+     scanf("%d", &n);                                     //
 
-	return 0;
+     for(i=0;i<n;i++)
+     {
+         printf("What's the number?\n");
+        scanf("%d", &x);
+        if(i==(n-1))
+            {
+                printf("\n");
+            }
+        insertfront(&list,x);
+
+     };
+     printList(&list);
+
+    return 0;
 }
 
 void insertfront(List* plist,int x)
 {
-	node *temp=(node*)malloc(sizeof(node));
-	temp->data = x;
+    node *temp=(node*)malloc(sizeof(node));
+    temp->data = x;
     temp->next = plist->head; //just find the 'head'
     plist->head = temp;
 }
@@ -165,8 +202,6 @@ void printList(List* plist)
         temp = temp->next;
     }
 }
-
-
 ```
 
 > add to anywhere:
@@ -202,7 +237,7 @@ int main()
 
 void insert(int data, int n)
 {
-    
+
     Node *temp = (Node *)malloc(sizeof(Node)); //temp represents a data we want to insert
     temp->data = data;
 
@@ -235,8 +270,6 @@ void print()
     }
     printf("\n");
 }
-
-
 ```
 
 > > eg1 avoid using global variable
