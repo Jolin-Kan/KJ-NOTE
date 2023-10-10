@@ -82,49 +82,163 @@ when it comes to achieve it, we can use different ways with programing language 
 > 
 > we can use <font color=yellow>strcture</font>
 
+here is a way to go through the linked list
+
+> let temp1 reach to the 'n-1'.th node
+
 ```c
-struct Node 
+ Node *temp1 = head;
+        for (int i = 0; i < n-2; i++)
+                {
+                    temp1 = temp1->next;
+                }
+```
+
+Hard to express, so linked list have a static structure
+
+here is different example
+
+> add to front
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+
+typedef struct _node
+{
+	int data;
+	struct _node *next;
+}node;
+
+typedef struct _List
+{
+	node *head;
+  //node *tail;
+}List;   // we use a brand new data type to represent the whole Linked-list 
+
+void insertfront(List* plist,int x);
+void printList(List* plist);
+
+
+int main(int argc, char const *argv[])
+{
+	
+	 List list;
+	 list.head=NULL;
+   //List.tail=NULL;
+
+	 int i,n,num,x;										 //
+	 printf("How many numbers do you want to enter?\n"); //
+	 scanf("%d", &n);									 //
+	 
+	 for(i=0;i<n;i++)
+	 {
+	 	printf("What's the number?\n");
+		scanf("%d", &x);
+		if(i==(n-1))
+			{
+				printf("\n");
+			}
+		insertfront(&list,x);
+	 	
+	 };
+	 printList(&list);
+
+	return 0;
+}
+
+void insertfront(List* plist,int x)
+{
+	node *temp=(node*)malloc(sizeof(node));
+	temp->data = x;
+    temp->next = plist->head; //just find the 'head'
+    plist->head = temp;
+}
+
+void printList(List* plist)
+{
+    node *temp = plist->head;
+    while (temp != NULL)
+    {
+        printf("%d\n", temp->data);
+        temp = temp->next;
+    }
+}
+
+
+```
+
+> add to anywhere:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
 {
     int data;
-    struct node* next; //point to node, so need to include a data-->struct
-};
-struct node* head; //declare a head node to represent a LL
-head = NULL; //its a empty ll
+    struct node *next;
+} Node;
+
+void insert(int data, int n);
+void print();
+
+Node *head = NULL; //emppty linked list
+
+int main()
+{
+    insert(2, 1); // 链表：2
+    insert(4, 2); // 链表：2 4
+    insert(6, 1); // 链表：6 2 4
+    insert(8, 3); // 链表：6 2 8 4
+    insert(10, 5); // 链表：6 2 8 4 10
+
+    print();
+
+    return 0;
+}
 
 
-struct node* temp=(strcut node*)malloc(sizeof(struct node)
-// create a block memory for entering data
-temp->data=2;
-temp->next=NULL; //add 2 into the ll
-head =temp; //let the head node point to the first element
+void insert(int data, int n)
+{
+    
+    Node *temp = (Node *)malloc(sizeof(Node)); //temp represents a data we want to insert
+    temp->data = data;
 
-
-/*add elements to the end of ll:
-to the end means we need to go through the ll
-so we can use (*head==NULL) to adjust if its the end of ll*/
-// 添加数字到链表末尾
-void append(struct Node** head, int num)
- {
-    // 创建新结点
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = num;
-    newNode->next = NULL;
-
-    // 如果链表为空，将新结点作为头结点
-    if (*head == NULL) 
+    if (n == 1) //insert to the first place
     {
-        *head = newNode;
+        temp->next = head;
+        head = temp;
         return;
     }
 
-    // 否则遍历至链表末尾
-    struct Node* temp = *head;
-    while (temp->next != NULL) 
-     {
-        temp = temp->next;
-    }
+        Node *temp1 = head;
+        for (int i = 0; i < n-2; i++)
+                {
+                    temp1 = temp1->next;
+                }
 
-    // 将新结点添加到链表末尾
-    temp->next = newNode;
+            temp->next=temp1->next;
+            temp1->next=temp;
+
+
 }
+
+void print()
+{
+    Node *temp1 = head;
+    while (temp1 != NULL)
+    {
+        printf("%d ", temp1->data);
+        temp1 = temp1->next;
+    }
+    printf("\n");
+}
+
+
 ```
+
+> > eg1 avoid using global variable
+> > 
+> > > eg2 does not
