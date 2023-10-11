@@ -34,28 +34,28 @@ int main(int argc, char const *argv[])
         switch (choice) 
         {
             case 1:
-                addContact();
+                addcontact();
                 break;
             case 2:
-                deleteContact();
+                deletecontact();
                 break;
             case 3:
-                searchContact();
+                searchcontact();
                 break;
             case 4:
-                updateContact();
+                updatecontact();
                 break;
             case 5:
-                saveContactsToFile();
+                savecontactsToFile();
                 break;
             case 6:
-                sortContacts();
+                sortcontacts();
                 break;
             case 7:
-                fuzzySearch();
+                fuzzysearch();
                 break;
             case 8:
-                saveContactsToFile(); // 退出前保存通讯录到文件
+                savecontactsToFile(); //save b4 quit
                 exit(0);
             default:
                 printf("无效的选择，请重新输入。\n");
@@ -76,6 +76,40 @@ void addcontact()
     printf("请输入关系: ");
     scanf("%s", newcontact->relation);
 
-   
+    newcontact->next=head; //create a head node of contact
+    head=newcontact; //add the newcontact to linked list
+    printf("添加成功");
+}
+
+void deletecontact
+{
+    char name[50];
+    printf("请输入要查询的联系人姓名: ");
+    scanf("%49s", name);
+
+    contact*current=head;
+    contact*previous=NULL;
+
+    while(current!=NULL)
+    {
+        if(strcmp(current->name,name)==0)//not the same
+         {
+            if(previous=NULL) //only one node
+            {
+                head=current->next;
+            }
+            else
+            {
+                previous->next=current->next
+            }
+
+            free(current); //delete the element
+            printf("联系人已删除\n");
+            return;
+         }
+          previous = current;
+          current = current->next; //go through linked-list
+    }
+       printf("未找到联系人：%s\n", name);
 
 }
