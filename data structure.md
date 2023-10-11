@@ -96,10 +96,12 @@ here is a way to go through the linked list
 
 Hard to express, so linked list have a static structure
 
-
-
 ## Basic code structure of linked list
 
+> We can use function to achieve 
+> 
+> > Insert    delete    reverse    print
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -110,134 +112,49 @@ typedef struct node
     struct node *next;
 } Node;
 
-void insert(int data, int n);
-void print();
-
 Node *head = NULL; //emppty linked list
-
+void reverse(Node*temp);
 int main()
 {
-    insert(2, 1); // 链表：2
-    insert(4, 2); // 链表：2 4
-    insert(6, 1); // 链表：6 2 4
-    insert(8, 3); // 链表：6 2 8 4
-    insert(10, 5); // 链表：6 2 8 4 10
-
-    print();
-
-    return 0;
-}
-```
-
-> insert function will varies by the aim
-
----
-
-here is different example
-
-> add to front
-
-```c
-#include <stdio.h>
-#include <stdlib.h>
-
-
-typedef struct _node
-{
-    int data;
-    struct _node *next;
-}node;
-
-typedef struct _List
-{
-    node *head;
-  //node *tail;
-}List;   // we use a brand new data type to represent the whole Linked-list 
-
-void insertfront(List* plist,int x);
-void printList(List* plist);
-
-
-int main(int argc, char const *argv[])
-{
-
-     List list;
-     list.head=NULL;
-   //List.tail=NULL;
-
-     int i,n,num,x;                                         //
-     printf("How many numbers do you want to enter?\n"); //
-     scanf("%d", &n);                                     //
-
-     for(i=0;i<n;i++)
-     {
-         printf("What's the number?\n");
-        scanf("%d", &x);
-        if(i==(n-1))
-            {
-                printf("\n");
-            }
-        insertfront(&list,x);
-
-     };
-     printList(&list);
-
-    return 0;
+    /*code*/ it is a basic structure
+             we can add different function
 }
 
-void insertfront(List* plist,int x)
+
+void print(Node*head) || printf linked-list with rescursion (order)
 {
-    node *temp=(node*)malloc(sizeof(node));
-    temp->data = x;
-    temp->next = plist->head; //just find the 'head'
-    plist->head = temp;
+    if(head==NULL) return;
+    printf("%d ", head->data);
+    print(head->next);
 }
 
-void printList(List* plist)
+
+void print(Node*head)  || printf linked-list with rescursion (reserve order)
 {
-    node *temp = plist->head;
-    while (temp != NULL)
+    if(head==NULL) return;
+     print(head->next);// go through linked list between print()untill NULL ---> braek the inside print() and then printf
+     printf("%d ", head->data); //reverse print
+}
+
+
+void reverse(Node*temp)
+{
+    if(temp==NULL)
     {
-        printf("%d\n", temp->data);
-        temp = temp->next;
+        head=temp;
+        return;
     }
-}
-```
-
-> add to anywhere:
-
-```c
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct node
-{
-    int data;
-    struct node *next;
-} Node;
-
-void insert(int data, int n);
-void print();
-
-Node *head = NULL; //emppty linked list
-
-int main()
-{
-    insert(2, 1); // 链表：2
-    insert(4, 2); // 链表：2 4
-    insert(6, 1); // 链表：6 2 4
-    insert(8, 3); // 链表：6 2 8 4
-    insert(10, 5); // 链表：6 2 8 4 10
-
-    print();
-
-    return 0;
+    reverse(temp->next); //recursion to go through 
+    Node *temp1=temp->next;
+    
+    temp1->next=temp;
+    temp->next=NULL;
 }
 
 
 void insert(int data, int n)
 {
-
+    
     Node *temp = (Node *)malloc(sizeof(Node)); //temp represents a data we want to insert
     temp->data = data;
 
@@ -247,8 +164,7 @@ void insert(int data, int n)
         head = temp;
         return;
     }
-
-        Node *temp1 = head;
+    Node *temp1 = head;
         for (int i = 0; i < n-2; i++)
                 {
                     temp1 = temp1->next;
@@ -256,22 +172,92 @@ void insert(int data, int n)
 
             temp->next=temp1->next;
             temp1->next=temp;
+}
 
+void insert(int data, int n) || insert front
+{
+node *temp=(node*)malloc(sizeof(node));
+	temp->data = x;
+    temp->next = plist->head; //just find the 'head'
+    plist->head = temp;
 
 }
 
-void print()
+
+void delete(int n)
 {
-    Node *temp1 = head;
-    while (temp1 != NULL)
+   int i;
+    Node* temp1=head;
+    if(n==1)
+        {
+            head=temp1->next;
+            free(temp1);
+            return;
+        }
+    for(i=0;i<n-2;i++)
     {
-        printf("%d ", temp1->data);
-        temp1 = temp1->next;
+        temp1=temp1->next;
     }
-    printf("\n");
+    Node* temp2=temp1->next;
+    temp1->next = temp2->next;
+    free(temp2);
 }
 ```
 
-> > eg1 avoid using global variable
-> > 
-> > > eg2 does not
+## Doubly linked-list
+
+every elements include one data & two pointer
+
+```c
+void insertNode(struct Node** head, int data) {
+    // 創建新節點
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+
+    // 如果鏈表為空，將新節點設為頭節點
+    if (*head == NULL) 
+{
+        *head = newNode;
+    } else {
+        // 否則，將新節點添加到鏈表的末尾
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+        newNode->prev = current;
+    }
+ }
+```
+
+---
+
+
+
+# Stack ADT    (Last-in-First-out )
+
+> a list with the restriction that the insertion and the deletion can be performed only on one side called 'top'
+
+## operations of stack
+
+1. Push(x)---> to insert a x
+
+2. pop(x)---> to remove a x
+
+3. Top()---> to tell the data on the top of stack
+
+4. isEmpty()---> to tell the stack is empty or not
+
+> > <font color=red>Notice</font> : Those are done as a constant time----> O(1);
+
+
+
+## Application:
+
+- Function call / recursion
+
+- Balanced parentheses // { () }
+
+- undo in the editor----> ctrl Z

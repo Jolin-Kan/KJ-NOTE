@@ -9,8 +9,9 @@ typedef struct node
 
 void insert(int data, int n);
 void print(Node*head);
-Node* reverse(Node*head);
+
 Node *head = NULL; //emppty linked list
+void reverse(Node*temp);
 
 int main()
 {
@@ -19,6 +20,7 @@ int main()
     insert(6, 1); // 链表：6 2 4
     insert(8, 3); // 链表：6 2 8 4
     insert(10, 5); // 链表：6 2 8 4 10
+    reverse(head);
     print(head);
    
    
@@ -52,11 +54,28 @@ void insert(int data, int n)
 void print(Node*head)
 {
     if(head==NULL) return;
-    // printf("%d ", head->data);
-    // print(head->next);
+    printf("%d ", head->data);
+    print(head->next);
 
-    print(head->next);// go through linked list between print()untill NULL ---> braek the inside print() and then printf
-    printf("%d ", head->data); //reverse print
+    // print(head->next);// go through linked list between print()untill NULL ---> braek the inside print() and then printf
+    // printf("%d ", head->data); //reverse print
+
+}
+
+void reverse(Node*temp)
+{
+    if(temp==NULL)
+    {
+        head=temp;
+        return;
+    }
+   
+    reverse(temp->next); //recursion to go through 
+    Node *temp1=temp->next;
+    
+    temp1->next=temp;
+    temp->next=NULL;
+    
 
 }
 

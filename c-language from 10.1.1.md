@@ -375,9 +375,6 @@ struct {
     int month;
     int day;
 }today,tomorrow; // only define two variable rather than a struct
-
-
- 
 ```
 
 ### struct member
