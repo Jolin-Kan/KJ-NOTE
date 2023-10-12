@@ -302,6 +302,20 @@ int main(){
 
 > > # gets(int) // scanf() // getchar()
 
+
+
+> ```c
+> char *fgets(char *str, int num, FILE *stream);
+> ```
+> 
+> > stdin    stdout   stderr ---> *stream
+> > 
+> > > 用於輸入的時候
+> > > 
+> > > stdin 指從鍵盤輸入    stdout/stderr  默認為顯示器
+
+---
+
 > **gets**(char *str); -----> unlimited 
 > 
 > > **fgets**() and **gets**() return a pointer to the string

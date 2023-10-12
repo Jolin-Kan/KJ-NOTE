@@ -277,3 +277,69 @@ void insertNode(struct Node** head, int data) {
 > push '{'/'('    & check the next
 > 
 > if'}' / ')'    pop( )  else     push; 
+
+# use stack to reverse a string
+
+> 1. push the string
+> 
+> 2. pop the string
+>    
+>    > ```c
+>    > typedef Node 
+>    > {
+>    >     char A[101]; // we are going to process string
+>    >     int top;
+>    > }node;
+>    > 
+>    > 
+>    > ...
+>    > 
+>    > void reverse(char A[],int n)
+>    > {
+>    >     node*B=(node*)malloc(sizeof(node));
+>    >     //loop for push
+>    >     for(i=0;i<n;i++)
+>    >     {
+>    >      push(A[i]);
+>    >     }
+>    >     //loop for pop
+>    >     for(i=0;i<n;i++)
+>    >     {
+>    >         A[i]=Top();
+>    >         pop();
+>    >     }
+>    > 
+>    > }
+>    > ```
+
+## Use stack to reverse a linked-list
+
+> 1. we need a temp node
+> 
+> 2. the operations in a loop
+> 
+> 3. temp node to go through as head
+>    
+>    > temp=top;
+>    > 
+>    > head=temp    //reverse head node
+>    > 
+>    > pop();    //top has been reversed and we need another element to be                 reversed as top()
+> 
+> 4. change the connection
+> 
+> > <font color=yellow>get in loop</font>
+> > 
+> > temp->next=top()    // (now)top is already reversed by temp
+> > 
+> > pop()     // switch to next to reverse
+> > 
+> > temp=temp->next // move temp to next
+
+## postfix    infix    prefix
+
+> different way of representing 'expression'
+> 
+> | infix   | postfix | prefix |
+> | ------- | ------- | ------ |
+> | a+(b*c) | abc*+   | +*abc  |
