@@ -146,7 +146,7 @@ void reverse(Node*temp)
     }
     reverse(temp->next); //recursion to go through 
     Node *temp1=temp->next;
-    
+
     temp1->next=temp;
     temp->next=NULL;
 }
@@ -154,7 +154,7 @@ void reverse(Node*temp)
 
 void insert(int data, int n)
 {
-    
+
     Node *temp = (Node *)malloc(sizeof(Node)); //temp represents a data we want to insert
     temp->data = data;
 
@@ -177,7 +177,7 @@ void insert(int data, int n)
 void insert(int data, int n) || insert front
 {
 node *temp=(node*)malloc(sizeof(node));
-	temp->data = x;
+    temp->data = x;
     temp->next = plist->head; //just find the 'head'
     plist->head = temp;
 
@@ -234,8 +234,6 @@ void insertNode(struct Node** head, int data) {
 
 ---
 
-
-
 # Stack ADT    (Last-in-First-out )
 
 > a list with the restriction that the insertion and the deletion can be performed only on one side called 'top'
@@ -252,8 +250,6 @@ void insertNode(struct Node** head, int data) {
 
 > > <font color=red>Notice</font> : Those are done as a constant time----> O(1);
 
-
-
 ## Application:
 
 - Function call / recursion
@@ -261,3 +257,23 @@ void insertNode(struct Node** head, int data) {
 - Balanced parentheses // { () }
 
 - undo in the editor----> ctrl Z
+
+---
+
+## Make a stack with array/linked list
+
+> array
+> 
+> ```c
+> 
+> ```
+
+---
+
+# stack
+
+> check balanced parentheses 
+> 
+> push '{'/'('    & check the next
+> 
+> if'}' / ')'    pop( )  else     push; 

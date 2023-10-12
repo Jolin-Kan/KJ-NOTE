@@ -25,7 +25,7 @@ void listcontacts();
 
 int main(int argc, char const *argv[])
 {
-    loadcontact();
+    loadcontact(); //check if we have existed contact
 while(1)
  {
 	int choose;
@@ -84,7 +84,7 @@ void addcontact()
     scanf("%s", newcontact->relation);
 
     newcontact->next=head; //create a head node of contact
-    head=newcontact; //add the newcontact to linked list
+    head=newcontact; //add the contact to linked list
     printf("添加成功");
 }
 
@@ -99,11 +99,11 @@ void deletecontact()
 
     while(current!=NULL)
     {
-        if(strcmp(current->name,name)==0)//not the same
+        if(strcmp(current->name,name)==0)//the name is same
          {
-            if(previous==NULL) //only one node
+            if(previous==NULL) //linked list only has one node
             {
-                head=current->next;
+                head=current->next; //directly empty the head(point to NULL)
             }
             else
             {
@@ -114,18 +114,18 @@ void deletecontact()
             printf("联系人已删除\n");
             return;
          }
+          // if the name is not the same then go throuh the linked-list
           previous = current;
           current = current->next; //go through linked-list
     }
-       printf("未找到联系人：%s\n", name);
-
+       printf("未找到联系人：%s\n", name); //couldn't return in. while ---> doesn't find the same name 
 }
 
 void searchcontact()
 {
     char name[50];
     printf("请输入要查询的联系人姓名");
-    scanf("%49s", name);
+    scanf("%s", name);
 
     contact*current=head;
 
@@ -148,7 +148,7 @@ void modifycontact()
 {
     char name[50];
     printf("请输入要修改的联系人姓名: ");
-    scanf("%49s", name);
+    scanf("%s", name);
 
     contact*current=head;
 
@@ -206,7 +206,7 @@ void loadcontact()
             strcpy(newcontact->phone, phone);
             strcpy(newcontact->relation, relation);
             newcontact->next=head;
-            head=newcontact; //take the linked list out from the file
+            head=newcontact; //take the linked list out from the file as contact
         }
         fclose(file);
      }
