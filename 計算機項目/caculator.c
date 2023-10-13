@@ -6,22 +6,88 @@ int cac(char optr,int a,int b);
 int countpostfix(char*expression);
 int isoperator(char A);
 int isoperand(char A);
+void infixtopostfix(char*expression,char*change);
+int getprecedence(char op);
 
 
 int main(int argc, char const *argv[])
 {
 	char expression[100]; //to store the expression
+	char change[100];
 	printf("====十以内整数计算机====\n");
 	printf("輸入表達式:\n");
     fgets(expression, sizeof(expression), stdin);
-    int result = countpostfix(expression);
+    infixtopostfix(expression,change);
+    int result = countpostfix(change);
     printf("結果為： %d\n", result);
 	return 0;
 }
 
+
+void infixtopostfix(char*expression,char*change)
+{
+	int top=-1;
+	int box[100];
+	int cnt=0;
+
+	for(int i=0;expression[i]!='\0';i++)
+	{
+		if(expression[i]==' '||expression[i]==',')
+		{
+			continue;
+		}
+		else if(isoperand(expression[i]))
+		{
+			while(isoperand(expression[i]))
+			{
+				change[cnt++]=expression[i++]; //output operand
+			}
+			change[cnt++]=' ';//to dovode the operand
+			i--;
+		}
+		else if(isoperator(expression[i]))
+			{
+			  while(top>-1&&box[top]!='('&& getprecedence(expression[i]) <= getprecedence(box[top])) //adjust the precedence of operators
+			  {
+			  	change[cnt++]=box[top--];
+			  	change[cnt++]=' ';
+			  }
+			  box[++top]=expression[i];//push to stack
+			}
+		else if(expression[i]=='(')
+			{
+				box[++top]=expression[i];
+			}
+			else if(expression[i]==')')
+			{
+				while(top>-1&&box[top]!='(') //have operator between parentheses 
+				{
+					change[cnt++]=box[top--];
+					change[cnt++]=' ';
+				}
+				if(top>-1&&box[top]=='(')
+				{
+				top--;
+			    }
+			}
+		
+
+
+			//after all the ( ) are done, now need to pop all...
+			while(top>-1)
+			{
+				change[cnt++]=box[top--];
+				change[cnt++]=' ';
+			}
+			
+	}
+	change[cnt]='\0';
+
+}
+
 int countpostfix(char* expression)
 {
-	int top = -1; //-->stack
+	int top = -1; //-->stack6tol
 	int box[100]; //to store operands
 	int ret = 0;
 
@@ -45,6 +111,11 @@ int countpostfix(char* expression)
 			box[++top]=expression[i]-'0';//find this mistake for a long time. turn char into int
 		}
 	}
+	// if (top != 0) 
+	// {
+    //     printf("错误：运算符数量不匹配\n");
+    //     exit(1);
+    // }
 	return ret;
 }
 
@@ -73,10 +144,27 @@ int cac(char optr,int op1,int op2)
 	if(optr=='*')
 		return (op1 * op2);
 	if(optr=='/')
+	{
+		if(op2==0)
+		{
+			printf("錯誤，除數不能為零");
+			return -1;
+		}
 		return (op1 / op2);
+	}
 	else
 		{
 		  printf("错误\n");
 		  return -1;	
 		}
 }
+
+int getprecedence(char op)
+{
+    if (op == '*' || op == '/')
+        return 2;
+    else if (op == '+' || op == '-')
+        return 1;
+    return 0;
+}
+

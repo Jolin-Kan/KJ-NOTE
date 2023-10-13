@@ -343,3 +343,35 @@ void insertNode(struct Node** head, int data) {
 > | infix   | postfix | prefix |
 > | ------- | ------- | ------ |
 > | a+(b*c) | abc*+   | +*abc  |
+
+# Use stack to count <font color=yellow>postfix</font>
+
+1. one list for operand and one stack for operator
+
+2. if is operand add to list
+
+3. if is operator,pop two previous operands and calculate; then push the ret in list
+
+# use stack to transform infix to postfix
+
+1. create a stack to store operator / parentheses 
+
+2. output the operand 
+
+3. if the stack is not empty && no higher precedent operator --> push
+
+4. if the stack is not empty && do have a higher precedent operator pop() all the operators then push
+   
+   <font color=red>5. </font> about parentheses if '(' match ')', all the operators between parentheses <font color=red>pop</font>
+
+
+
+---
+
+# Queue
+
+
+
+The queue is a common linear data structure, which operates based on the first-in-first-out <font color=yellow>(FIFO)</font> principle, which means that the elements that**** first enter the queue will be deleted first.**** The queue is usually used to simulate queuing, such as operating system task tuning, packet transmission, etc. in computer science.
+
+### Achieve queue in C
