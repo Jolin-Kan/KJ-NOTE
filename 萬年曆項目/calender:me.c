@@ -18,7 +18,8 @@ int main(int agrc, const char* agrv[])
 	int year, month,day;
     int choice; //紀錄用戶的選擇
 
-    
+    while(1)
+  {
         printf("<===== 萬年曆菜單 =====>\n");
         printf("1. 顯示日曆\n");
         printf("2. 退出\n");
@@ -259,6 +260,8 @@ int main(int agrc, const char* agrv[])
 
 
         }
+    }
         return 0;
+ 
         
  }

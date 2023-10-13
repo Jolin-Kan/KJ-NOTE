@@ -4,6 +4,21 @@ note  of studying html
 This is my summary of my study note written with markdown.
 HTML5  |  C language  |  Date structure and algorithm  |
 
+---
+
+# <font color=yellow>先看這！考核整體總結</font>
+
+在整个考核期间：
+
+1. 完成了C语言基础部分学习
+
+2. C语言项目大体完成
+- 万年历：同时满足了进阶需求
+
+- 通讯录：只完成进阶需求的文件保存
+
+- 计算机：满足全部进阶需求
+
 ### 231008 總結
 
 目前已完成C語言主要學習
@@ -27,3 +42,5 @@ HTML5  |  C language  |  Date structure and algorithm  |
 學習了棧的定義以及其兩種形成方式（數組/鏈表）。
 
 對計算機項目進行了構思，寫出了大體框架。
+
+---

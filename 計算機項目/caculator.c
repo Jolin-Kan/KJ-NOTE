@@ -12,6 +12,8 @@ int getprecedence(char op);
 
 int main(int argc, char const *argv[])
 {
+while(1)
+ {
 	char expression[100]; //to store the expression
 	char change[100];
 	printf("====十以内整数计算机====\n");
@@ -20,6 +22,7 @@ int main(int argc, char const *argv[])
     infixtopostfix(expression,change);
     int result = countpostfix(change);
     printf("結果為： %d\n", result);
+ }
 	return 0;
 }
 
@@ -27,7 +30,7 @@ int main(int argc, char const *argv[])
 void infixtopostfix(char*expression,char*change)
 {
 	int top=-1;
-	int box[100];
+	int box[100]; // to store operator as stack
 	int cnt=0;
 
 	for(int i=0;expression[i]!='\0';i++)
@@ -70,6 +73,7 @@ void infixtopostfix(char*expression,char*change)
 				top--;
 			    }
 			}
+	}
 		
 
 
@@ -80,14 +84,13 @@ void infixtopostfix(char*expression,char*change)
 				change[cnt++]=' ';
 			}
 			
-	}
 	change[cnt]='\0';
 
 }
 
 int countpostfix(char* expression)
 {
-	int top = -1; //-->stack6tol
+	int top = -1; //-->stack
 	int box[100]; //to store operands
 	int ret = 0;
 
@@ -111,11 +114,7 @@ int countpostfix(char* expression)
 			box[++top]=expression[i]-'0';//find this mistake for a long time. turn char into int
 		}
 	}
-	// if (top != 0) 
-	// {
-    //     printf("错误：运算符数量不匹配\n");
-    //     exit(1);
-    // }
+	
 	return ret;
 }
 
@@ -147,7 +146,7 @@ int cac(char optr,int op1,int op2)
 	{
 		if(op2==0)
 		{
-			printf("錯誤，除數不能為零");
+			printf("錯誤，除數不能為零\n");
 			return -1;
 		}
 		return (op1 / op2);
