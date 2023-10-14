@@ -147,7 +147,7 @@ int cac(char optr,int op1,int op2)
 		if(op2==0)
 		{
 			printf("錯誤，除數不能為零\n");
-			return -1;
+			exit(-1);
 		}
 		return (op1 / op2);
 	}

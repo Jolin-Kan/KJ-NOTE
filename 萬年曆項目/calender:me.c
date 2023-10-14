@@ -257,10 +257,13 @@ int main(int agrc, const char* agrv[])
         		printf("error");
         	}
         	
-
+             printf("\n");
 
         }
+        if(choice==2)
+            goto out;
     }
+        out:
         return 0;
  
         

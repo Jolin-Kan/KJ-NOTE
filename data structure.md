@@ -364,13 +364,9 @@ void insertNode(struct Node** head, int data) {
    
    <font color=red>5. </font> about parentheses if '(' match ')', all the operators between parentheses <font color=red>pop</font>
 
-
-
 ---
 
 # Queue
-
-
 
 The queue is a common linear data structure, which operates based on the first-in-first-out <font color=yellow>(FIFO)</font> principle, which means that the elements that**** first enter the queue will be deleted first.**** The queue is usually used to simulate queuing, such as operating system task tuning, packet transmission, etc. in computer science.
 
