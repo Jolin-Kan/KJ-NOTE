@@ -371,3 +371,15 @@ void insertNode(struct Node** head, int data) {
 The queue is a common linear data structure, which operates based on the first-in-first-out <font color=yellow>(FIFO)</font> principle, which means that the elements that**** first enter the queue will be deleted first.**** The queue is usually used to simulate queuing, such as operating system task tuning, packet transmission, etc. in computer science.
 
 ### Achieve queue in C
+
+> we can use linked-list to form a queue
+> 
+> > we regard the head node as the head of queue    ;  
+> > 
+> > > so we add a new data to front,delete the last to work as queue does
+
+---
+
+# Trees
+
+<img title="" src="file:///Users/jolin/Pictures/md.pic.library/tree.png" alt="" width="922">
