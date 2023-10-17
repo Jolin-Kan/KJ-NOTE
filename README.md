@@ -53,3 +53,7 @@ HTML5  |  C language  |  Date structure and algorithm  |
 對計算機項目進行了構思，寫出了大體框架。
 
 ---
+
+# I'm OUT
+
+But this will be my motivation to reach more filed 

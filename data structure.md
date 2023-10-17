@@ -382,4 +382,4 @@ The queue is a common linear data structure, which operates based on the first-i
 
 # Trees
 
-<img title="" src="file:///Users/jolin/Pictures/md.pic.library/tree.png" alt="" width="922">
+<img title="" src="file:///Users/jolin/Pictures/md.pic.library/tree.png" alt="" width="922"> 
