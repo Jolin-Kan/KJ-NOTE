@@ -124,7 +124,7 @@ the attribute of <font color=yellow>color width size align</font> is changeable
 
 has five attributes we can change
 
-- src : source road /// <font color=yellow>the ima and the html doc must be i n the same folder</font> 
+- src : source road  
 
 - alt: the img's name. when the img fail to display, browser will show alt name.
 
@@ -146,15 +146,32 @@ has five attributes we can change
 .image {
     margin-right: 10px; /* 添加右侧间隔 */
 }
-
-
 ```
 
 ```html
 <img src="image1.jpg" style="margin-right: 10px;">
 <img src="image2.jpg" style="margin-right: 10px;">
 <img src="image3.jpg" style="margin-right: 10px;">
-
 ```
 
 Attribute of <font color=red>style</font> 
+
+## The path of img
+
+1. Absolute path
+   
+   > the path of the pc hard disk
+
+2. Relative path
+   
+   > 源码文件和图片文件在同一路径下
+   > 
+   > > Child-level: '/'
+   > > 
+   > > Parent-level: '../'
+   > > 
+   > > Sibling-level: './' (Omitted)
+
+3. Internet path
+   
+   > the path in the internet router 
