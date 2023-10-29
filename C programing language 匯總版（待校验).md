@@ -1,4 +1,202 @@
-# Note for C language with markdown(from     10.1.1-string)
+# C programing language 匯總版（待校验)
+
+```markdown
+# C语言笔记
+
+## 基本程序模型
+
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+```
+
+C语言的基本程序模型以分号结束每一句。
+
+- `#include <stdio.h>` 包含头文件。
+- `int main()` 主函数的入口。
+- `printf("Hello, World!\n");` 打印文本。
+- `return 0;` 返回整数值0。
+
+`printf("XXX");` 用于显示文本。
+
+`int` 用于定义整数，`int A = B` 表示定义一个名为A的变量，其初始值为B。
+
+`const int A = B` 表示A是一个常量，其值为B。
+
+`scanf("%d", &input)` 用于从控制台读取整数。
+
+- `%d` 表示整数。
+- `%f` 表示浮点数。
+
+使用 `int` 时，要使用 `scanf("%d")`。
+
+使用 `double` 时，要使用 `scanf("%lf")` 和 `printf("%f")`。
+
+## 算子和运算符
+
+- `&` 是一个运算符，用于取变量的地址。
+- `sizeof()` 是一个运算符，用于计算括号内数据类型的内存占用空间。
+
+自增（`++`）和自减（`--`）运算符，可以放在前或后。
+
+- `a++` 等同于 `a = a + 1`。
+- `++a` 等同于 `a = a + 1`。
+
+BCD（二进制编码十进制）是将十进制数转化为十六进制数，去掉`0x`前缀。
+
+## 控制结构
+
+### If语句
+
+```c
+if (条件) {
+    // 执行条件为真时的代码
+} else {
+    // 执行条件为假时的代码
+}
+```
+
+`if` 可以改成 `while` 并在执行条件后加上分号，这样就变成了 `while` 循环。`while(0)` 不执行循环，`while(1)` 永远执行循环。
+
+### Do-While循环
+
+```c
+do {
+    // 循环体
+} while (条件);
+```
+
+`do-while` 先执行循环体，然后检查条件。而 `while` 先检查条件，再执行循环体。
+
+### Switch-Case语句
+
+```c
+switch (expression) {
+    case constant1:
+        // 代码块1
+        break;
+    case constant2:
+        // 代码块2
+        break;
+    default:
+        // 默认代码块
+        break;
+}
+```
+
+`switch-case` 可以代替级联的 `if-else` 语句。
+
+### For循环
+
+```c
+for (初始化语句; 循环继续的条件; 循环要执行的语句) {
+    // 循环体
+}
+```
+
+## 函数
+
+函数由返回类型、函数名、参数列表和函数体组成。
+
+函数调用使用函数名，并提供相应的参数。
+
+函数可以有返回值，也可以是 `void` 表示没有返回值。
+
+函数的参数可以是值传递，也可以是指针传递。
+
+```c
+返回类型 函数名(参数列表);    //function's statement
+
+返回类型 函数名(参数列表) {
+    // 函数体
+}
+```
+
+`the name of function can be passed between different scopes(作用域）`
+
+`so function is actually a kind of pointer`
+
+> BTW,computer need to assign memory for the <font color=red>body of function</font>
+
+### Function pointer (variable)
+
+```c
+int Func(int x);   /*声明一个函数*/
+int (*p) (int x);  /*定义一个函数指针*/
+p = Func;          /*将Func函数的首地址赋给指针变量p*/
+```
+
+> I need to further studying to figure out why its significant.
+
+---
+
+## 数据类型
+
+> <mark>实型常量又称实数或浮点数</mark>
+
+
+
+C语言支持不同数据类型：
+
+- 整数类型：`char`, `short`, `int`, `long`, `long long`
+- 浮点数类型：`float`, `double`, `long double`
+- 逻辑类型：`bool`
+- 指针类型
+- 用户自定义类型
+
+#### Integer
+
+数据类型有不同的范围和精度。整数类型会有最大和最小值的限制。
+
+## 数组
+
+数组是一组相同数据类型的元素。
+
+```c
+int array[5];
+```
+
+数组的元素可以通过索引访问，索引从0开始。
+
+```c
+array[2] = 10;
+```
+
+数组的大小可以使用 `sizeof` 操作符来确定。
+
+## 指针
+
+指针是用来存储变量地址的变量。
+
+```c
+int *p = &a;
+```
+
+指针变量可以用于传递变量的地址，从而在不同函数之间传递数据。
+
+## 动态内存分配
+
+使用 `malloc` 函数来分配动态内存。
+
+```c
+int *array = (int *)malloc(5 * sizeof(int));
+```
+
+分配后，需要使用 `free` 函数释放内存，否则会导致内存泄漏。
+
+## 字符串
+
+字符串是字符的数组。
+
+```c
+char str[] = "Hello, World!";
+```
+
+C语言中没有内置的字符串类型，字符串通常使用`字符数组`表示。
 
 ## String & Character array
 
@@ -155,7 +353,7 @@ here is two way of representing a string array:
 
 2. char** ----> a pointer point to another pointer == form an array
 
-it means we have a pointer called string and this pointer(string) point to another pointer.That pointer point to a character. 
+it means we have a pointer called string and this pointer(string)  to another pointer.That pointer point to a character. 
 
 look at 1&3: 
 
@@ -168,6 +366,40 @@ it means there is a array and each elements of the array have the capacity of 10
 #### No.3/4
 
  a is a array and its elements are pointers that point to character 
+
+---
+
+> ```c
+> int s[4][5],(*ps)[5]; /* , represent s&ps share the 'int'*/
+> int *p[5]
+> 
+> ps+1; ---->point to the next row of the 2D array(s),exactly the 
+>             second row of the S
+> 
+> *(ps+3);--->(ps+3)==pointer to the fourth row of the S
+>             -----> *(ps+3)==that array,the fourth row of S.  
+> 
+> *(ps+1)+3;---->*[(ps+1)+3]
+> (ps+1)+3----> the fourth element of the second row of the S
+>               (s的第二行数组的第四个元素)
+> *(ps+1)+3 ----> that element's *address* 
+> 
+> 
+> char a[5][5] & int a[5][5]
+> ！！！！！！     string array & 2D array   !!!!!!!!!
+> ```
+
+ITs a quite interesting epression:
+
+so <font color=yellow>ps</font> represents a pointer to an <font color=pink>array with the size of 5 integers</font>--->and this array is exactly <font color=green>S 's first row</font>
+
+> <font color=HOtpink>the parentheses is necessary!!!</font>
+
+#### However
+
+#### <font color=hotpink>P</font> represents an array of pointer (指针数组)
+
+> there is an array of five pointers. The element of the array, pointer, to an integer.
 
 ---
 
