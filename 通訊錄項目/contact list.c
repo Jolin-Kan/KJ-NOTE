@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h> //malloc
-#include <string.h> //enter phone number & character info
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct Contact 
 {
@@ -8,9 +8,10 @@ typedef struct Contact
     char phone[15];
     char relation[50];
     struct Contact* next;
-}contact;
+} contact;
 
-contact* head=NULL;
+contact* head = NULL;
+
 void addcontact();
 void deletecontact();
 void searchcontact();
@@ -20,17 +21,13 @@ void loadcontact();
 void sortcontacts();
 void listcontacts();
 
-
-// its a control panel including all the functions
-
 int main(int argc, char const *argv[])
 {
-    loadcontact(); //check if we have existed contact
-while(1)
- {
-	int choose;
-
-		printf("\n====通讯录====\n");
+    loadcontact(); // 检查是否有现有联系人
+    while (1)
+    {
+        int choose;
+        printf("\n====通讯录====\n");
         printf("1. 增加联系人\n");
         printf("2. 删除联系人\n");
         printf("3. 查询联系人\n");
@@ -40,7 +37,6 @@ while(1)
         printf("7. 退出程序\n");
         printf("请选择操作: ");
         scanf("%d", &choose);
-
         switch (choose) 
         {
             case 1:
@@ -60,32 +56,45 @@ while(1)
                 break;
             case 6:
                 listcontacts();
+                break;
             case 7:
-                savecontact(); //save b4 quit
+                savecontact(); // 退出前保存
                 exit(0);
             default:
                 printf("无效的选择，请重新输入。\n");
         }
- }
-
-
-	return 0;
+    }
+    return 0;
 }
 
 void addcontact()
 {
-	contact* newcontact=(contact*)malloc(sizeof(contact));
+    contact* newcontact = (contact*)malloc(sizeof(contact));
 
-	printf("请输入姓名: ");
+    printf("请输入姓名: ");
     scanf("%s", newcontact->name);
+
+    // 检查是否有重复的姓名
+    contact* current = head;
+    while (current != NULL)
+    {
+        if (strcmp(current->name, newcontact->name) == 0)
+        {
+            printf("联系人已存在，请不要重复添加。\n");
+            free(newcontact);
+            return;
+        }
+        current = current->next;
+    }
+
     printf("请输入手机号: ");
     scanf("%s", newcontact->phone);
     printf("请输入关系: ");
     scanf("%s", newcontact->relation);
 
-    newcontact->next=head; //create a head node of contact
-    head=newcontact; //add the contact to linked list
-    printf("添加成功");
+    newcontact->next = head;
+    head = newcontact;
+    printf("添加成功\n");
 }
 
 void deletecontact()
@@ -94,51 +103,51 @@ void deletecontact()
     printf("请输入要删除的联系人姓名: ");
     scanf("%49s", name);
 
-    contact*current=head;
-    contact*previous=NULL;
+    contact* current = head;
+    contact* previous = NULL;
 
-    while(current!=NULL)
+    while (current != NULL)
     {
-        if(strcmp(current->name,name)==0)//the name is same
-         {
-            if(previous==NULL) //linked list only has one node
+        if (strcmp(current->name, name) == 0)
+        {
+            if (previous == NULL)
             {
-                head=current->next; //directly empty the head(point to NULL)
+                head = current->next;
             }
             else
             {
-                previous->next=current->next;
+                previous->next = current->next;
             }
 
-            free(current); //delete the element
+            free(current);
             printf("联系人已删除\n");
             return;
-         }
-          // if the name is not the same then go throuh the linked-list
-          previous = current;
-          current = current->next; //go through linked-list
+        }
+        previous = current;
+        current = current->next;
     }
-       printf("未找到联系人：%s\n", name); //couldn't return in. while ---> doesn't find the same name 
+
+    printf("未找到联系人：%s\n", name);
 }
 
 void searchcontact()
 {
     char name[50];
-    printf("请输入要查询的联系人姓名");
+    printf("请输入要查询的联系人姓名: ");
     scanf("%s", name);
 
-    contact*current=head;
+    contact* current = head;
 
-    while(current!=NULL)
+    while (current != NULL)
     {
-        if(strcmp(current->name,name)==0)
-            {
-                printf("姓名: %s\n", current->name);
-                printf("手机号: %s\n", current->phone);
-                printf("关系: %s\n", current->relation);
-                return;
-            }
-            current=current->next;
+        if (strcmp(current->name, name) == 0)
+        {
+            printf("姓名: %s\n", current->name);
+            printf("手机号: %s\n", current->phone);
+            printf("关系: %s\n", current->relation);
+            return;
+        }
+        current = current->next;
     }
 
     printf("未找到联系人：%s\n", name);
@@ -150,31 +159,31 @@ void modifycontact()
     printf("请输入要修改的联系人姓名: ");
     scanf("%s", name);
 
-    contact*current=head;
+    contact* current = head;
 
-    while(current!=NULL)
+    while (current != NULL)
     {
-        if(strcmp(current->name, name) == 0)
+        if (strcmp(current->name, name) == 0)
         {
-            printf("请输入新手机号:\n ");
+            printf("请输入新手机号: ");
             scanf("%s", current->phone);
-            printf("请输入新关系:\n ");
+            printf("请输入新关系: ");
             scanf("%s", current->relation);
             printf("联系人已更新\n");
             return;
         }
-        current=current->next;
+        current = current->next;
     }
-    printf("未找到联系人：%s\n",name);
+    printf("未找到联系人：%s\n", name);
 }
 
 void savecontact()
 {
-    FILE*file=fopen("/Users/jolin/Documents/GitHub/KJ-NOTE/通訊錄項目/contactlist.txt","w");
-    if(file)
+    FILE* file = fopen("contactlist.txt", "w");
+    if (file)
     {
-        contact*current=head;
-        while(current!=NULL)
+        contact* current = head;
+        while (current != NULL)
         {
             fprintf(file, "%s %s %s\n", current->name, current->phone, current->relation);
             current = current->next;
@@ -184,44 +193,44 @@ void savecontact()
     }
     else
     {
-        printf("文件出错");
+        printf("文件出错\n");
         return;
     }
 }
 
 void loadcontact()
 {
-     FILE* file = fopen("/Users/jolin/Documents/GitHub/KJ-NOTE/通訊錄項目/contactlist.txt", "r");
+    FILE* file = fopen("contactlist.txt", "r");
 
-     if(file!=NULL)
-     {
+    if (file != NULL)
+    {
         char name[50];
         char phone[15];
         char relation[50];
 
-        while(fscanf(file,"%s %s %s\n",name,phone,relation)==3)//is already pointer
+        while (fscanf(file, "%s %s %s\n", name, phone, relation) == 3)
         {
-            contact*newcontact=(contact*)malloc(sizeof(contact));
+            contact* newcontact = (contact*)malloc(sizeof(contact));
             strcpy(newcontact->name, name);
             strcpy(newcontact->phone, phone);
             strcpy(newcontact->relation, relation);
-            newcontact->next=head;
-            head=newcontact; //take the linked list out from the file as contact
+            newcontact->next = head;
+            head = newcontact;
         }
         fclose(file);
-     }
-     else
-     {
-         printf("无法打开文件。\n");
+    }
+    else
+    {
+        printf("无法打开文件\n");
         return;
-     }
+    }
 }
 
 void listcontacts() 
 {
     if (head == NULL) 
     {
-        printf("通讯录为空。\n");
+        printf("通讯录为空\n");
         return;
     }
 

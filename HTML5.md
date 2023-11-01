@@ -2,7 +2,15 @@
 
 > HTML     *hyper text markup language*
 > 
-> SO <font color=#ff0000>label</font> make up html. Every elements of html are label 
+> SO <font color=#ff0000>label</font> makes up html. Every elements of html are label 
+
+
+
+#### XHTML & HTML4 & HTML5
+
+> has a little differences in grammar 
+> 
+> <mark>XHTML ---> XML & HTML</mark>
 
 ---
 
@@ -48,6 +56,23 @@
 > 
 > meta label is in the head label like title label does.
 
+
+
+## <meta> properties
+
+| property    | statement                                                                                           |
+| ----------- | --------------------------------------------------------------------------------------------------- |
+| content     | 必須的，定義與http-equive or name 屬性相關聯的元信息                                                                |
+| http-equive | 把content屬性關聯到HTTP頭部。取值有：content-type,expires,refresh,<font color=red>set-cookie</font> (用於設定網頁是否緩存) |
+| name        | 把content屬性關聯到一個名稱。取值有：author,description,keywords,generator,revised...                              |
+| scheme      | 定義 用於翻譯content屬性值的格式                                                                                |
+| charset     | 定義字符編碼格式（UTF-8//gb2312）                                                                             |
+
+```html
+<mate http-equive='refresh'content='5'/>
+<--5s刷新一次web --> 
+```
+
 ---
 
 ## The basic structure of html like:
@@ -64,7 +89,7 @@
 > </html>    
 > ```
 
-## Title label ----> <h1>****</h1>
+## Title label ---->  `<h1>****</h1>`
 
 Title has six level; 1~6
 
@@ -83,6 +108,10 @@ Title has six level; 1~6
 > ```html
 >     <h1 align="center"> title center </h1>
 > ```
+
+- <font color=purple>align属于HTML4的属性，建议使用CSS实现此类功能</font>
+
+
 
 ![](/Users/jolin/Pictures/md.pic.library/title%20label.png)
 
@@ -106,7 +135,7 @@ of break label <br/> in the paragraph label</p>
 
 3.Horizon line <hr/>
 
-the attribute of <font color=yellow>color width size align</font> is changeable
+the attribute of <font color=blue>color width size align</font> is changeable
 
 > size also means height 
 > 
@@ -160,18 +189,109 @@ Attribute of <font color=red>style</font>
 
 1. Absolute path
    
-   > the path of the pc hard disk
+   > the path 
 
 2. Relative path
    
    > 源码文件和图片文件在同一路径下
    > 
-   > > Child-level: '/'
+   > > sub-level: '/'
    > > 
    > > Parent-level: '../'
    > > 
-   > > Sibling-level: './' (Omitted)
+   > > Sibling-level: './' (Omitted)可省略
 
 3. Internet path
    
    > the path in the internet router 
+
+---
+
+## <a> 超連結標籤
+
+```html
+<a herf='URL'>link text</a>
+<a herf='URL'>
+    <img src='' >
+</a>
+```
+
+- 超連結文本可以是圖片/文本/
+
+> 日後利用CSS可以更改顯示的樣式
+
+---
+
+## 文本標籤
+
+- 有別與之前所提及的段落<p>標籤
+
+> 段落標籤承載的是一段話，而文本標籤單純承載<mark>词汇</mark>
+
+### 文本标签的类型：
+
+```html
+    <em></em>     emphasis
+    <b></b>    bold
+    <i></i>    italic
+    <strong></strong> like bold
+    <del></del>    delete line
+    <span></span>    meaningless
+    <p>my favouoite camara brand is <b>Nikon</b></p>
+```
+
+![](/Users/jolin/Pictures/md.pic.library/文本标签效果.png)
+
+- 如圖，文本標籤還可以嵌套在<p>中使用
+
+---
+
+## 列表標籤
+
+> order list & disorder list
+> 
+> <ol>    <ul>
+
+
+
+### 有序列表和無序列表的實現以及<font color=blue>嵌套</font>
+
+```html
+<ol type="I">
+        <li>first</li>
+        <li>
+            second
+            <ul type="circle">
+                <li>inside first</li>
+                <li>inside second</li>
+            </ul>
+        </li>
+        <li>third</li>
+    </ol>
+```
+
+![](/Users/jolin/Pictures/md.pic.library/列表效果.png)
+
+### Type
+
+##### 有序列表：
+
+- 1---->數字
+
+- a---->小寫字母
+
+- A---->大寫字母
+
+- i---->小寫羅馬數字
+
+- I---->大寫羅馬數字
+
+#### 無序列表
+
+- disc    
+  
+  - circle
+    
+    - square
+
+- none

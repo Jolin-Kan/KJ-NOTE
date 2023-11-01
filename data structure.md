@@ -383,3 +383,107 @@ The queue is a common linear data structure, which operates based on the first-i
 # Trees
 
 <img title="" src="file:///Users/jolin/Pictures/md.pic.library/tree.png" alt="" width="922"> 
+
+## Binary search tree
+
+- perfect bts
+  
+  - full
+
+- complete bts
+  
+  - 按層級排序，不一定要滿
+  
+  - if a node only have one child--->it must be leftchild
+
+- ##### attributes
+  
+  對於一顆有n個節點的完全二叉樹
+  
+  - 深度（若根節點的深度為1）為【log2（n））】+1
+  
+  - i=1的節點是根節點，無雙親；i>2，其雙親是節點【i/2】
+  
+  - 若2i>0，節點無左孩，否則其左孩節點為2i
+  
+  - 若2i+1>n。節點i無右孩；否則其右孩為節點2i+1
+
+form a bts with C
+
+```c
+#include <stdio.h> //create a Binary search tree about number mbers
+#include <stdlib.h>
+
+
+typedef struct Bst
+{
+    int data;
+    struct Bst* left;
+    struct Bst* right;
+
+}bst;
+
+bst* Getnewnode(int data);
+void insert(bst** root,int data);
+
+
+int main(int argc, char const *argv[])
+{
+    bst* root=NULL; //create a empty tree
+    insert(&root,15);
+    insert(&root,10);
+    insert(&root,20);
+    return 0;
+}
+
+bst* Getnewnode(int data)
+{
+    bst* newnode = (bst*)malloc(sizeof(bst));
+    newnode->data=data;
+    newnode->left=NULL;
+    newnode->right=NULL;
+    return newnode;
+}
+
+void insert(bst** root,int data)     //the operation to physical root ---> *root
+{
+    if(*root == NULL)
+    {
+        *root = Getnewnode(data); 
+    }
+    else if(data <= (*root)->data)
+    {
+        // bst* newnode = Getnewnode(data);
+        // (*root)->left = newnode;
+        insert(&((*root)->left),data); //using recursion
+    }
+    else if(data > (*root)->data)
+    {
+        // bst* newnode = Getnewnode(data);
+        // (*root)->right = newnode;
+        insert(&((*root)->right),data);
+    }
+}
+```
+
+---
+
+### BTS traversal
+
+D: data,read the current data
+
+L:go to right data
+
+R: go to right data
+
+#### Preorder    : DLR
+
+> 到达一个节点，先记录这个；再到它的左孩，记录本身，如果没有左孩了，记录右孩，若没有右孩，返回上一级，记录上一级的右孩
+
+#### Inorder    ： LDR
+
+> 到达一个节点，若有左孩，去到左孩；若还有左孩，继续，否则记录该节点，再继续到右支（同左支）
+
+### Postorder    ： LRD
+
+> 类比左右支的递归方法---->从下到上

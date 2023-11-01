@@ -138,8 +138,6 @@ p = Func;          /*将Func函数的首地址赋给指针变量p*/
 
 > <mark>实型常量又称实数或浮点数</mark>
 
-
-
 C语言支持不同数据类型：
 
 - 整数类型：`char`, `short`, `int`, `long`, `long long`
