@@ -150,6 +150,22 @@ C语言支持不同数据类型：
 
 数据类型有不同的范围和精度。整数类型会有最大和最小值的限制。
 
+### float
+
+  注：%e指使用科学计数法
+
+e.g 1230000 == 1.23E+16
+
+浮点数的输出可在%和f之间添加精度(遵循四舍五入）
+
+Printf(“%.30f”,0.049）—> 0.05
+
+浮點數在計算機內部的表達：
+
+個人理解：將浮點數轉化爲二進制的科學計數法，double佔據八字節，64bit，將這些位分為三部分，“符號位，階碼，尾數”分別表示 正負、二進制的指數、科學計數法的小數部分（尾數）
+
+<mark>/float數值的表達要在最後加f，—> 1.23f；如果沒加，儘管定義為float，都當作double</mark>
+
 ## 数组
 
 数组是一组相同数据类型的元素。
@@ -306,7 +322,7 @@ printf("%s\n", string);
 printf("%s\n", string);
 ```
 
-> Notice: scanf () only scan a 'word' <font color=green>(divided by empty, tab or enter)</font> once.
+> <font color=blue>Notice: scanf () only scan a 'word' (divided by empty, tab or enter)</font> once.</font> 
 
 So scanf() will scan the word one by one(if needed) ----
 
@@ -833,7 +849,7 @@ printf("%d",10/A(7));==> 10/7*300
 
 ### Some principles of Macro-define with parameters
 
-- Everything needs parentheses
+- Every single thing needs parentheses
   
   - the parameter needs parentheses 
   
@@ -915,7 +931,7 @@ Scanf ---> %[flag]type
 
 - the number of character it print
   
-  > 不要忘記<font color=yellow>逃逸字符</font> 如'\n' return
+  > 不要忘記<font color=purple>逃逸字符</font> 如'\n' return
 
 ---
 

@@ -49,7 +49,7 @@ void insert(bst** root,int data)	 //the operation to physical root ---> *root
 		// bst* newnode = Getnewnode(data);
 		// (*root)->left = newnode;
 
-		insert(&((*root)->left),data); //using recursion
+		insert(&((*root)->left),data); //input the address of root->left	
 	}
 	else if(data > (*root)->data)
 	{

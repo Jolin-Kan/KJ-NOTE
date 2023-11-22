@@ -254,7 +254,7 @@ void insertNode(struct Node** head, int data) {
 
 - Function call / recursion
 
-- Balanced parentheses // { () }
+- <mark>Balanced parentheses // { () }</mark>
 
 - undo in the editor----> ctrl Z
 
@@ -368,7 +368,7 @@ void insertNode(struct Node** head, int data) {
 
 # Queue
 
-The queue is a common linear data structure, which operates based on the first-in-first-out <font color=yellow>(FIFO)</font> principle, which means that the elements that**** first enter the queue will be deleted first.**** The queue is usually used to simulate queuing, such as operating system task tuning, packet transmission, etc. in computer science.
+The queue is a common linear data structure, which operates based on the first-in-first-out <font color=blue>(FIFO)</font> principle, which means that the elements that**** first enter the queue will be deleted first.**** The queue is usually used to simulate queuing, such as operating system task tuning, packet transmission, etc. in computer science.
 
 ### Achieve queue in C
 
@@ -385,6 +385,10 @@ The queue is a common linear data structure, which operates based on the first-i
 <img title="" src="file:///Users/jolin/Pictures/md.pic.library/tree.png" alt="" width="922"> 
 
 ## Binary search tree
+
+#### definition
+
+- a binary tree in which for each node,value of all the node in left subtree is <mark>lesser or equal</mark> and value of  nodes in right subtree are greater.
 
 - perfect bts
   
@@ -487,3 +491,26 @@ R: go to right data
 ### Postorder    ： LRD
 
 > 类比左右支的递归方法---->从下到上
+> 
+
+
+
+### 判断是否BST
+
+
+
+### Delete a Node of the Binary search tree
+
+- **case 1**: the node have no child
+  
+  - deprive the link directly
+
+- **case 2**: the node have only one child
+  
+  - modify the link directly
+  
+  - > root->left = next node (<mark>skip</mark> the node u want to delete)
+
+- **case 2**: have two child
+  
+  - <mark>turn into case 1/2</mark>
