@@ -473,8 +473,6 @@ BDI
 
 - 控件就是按钮，输入框等 
 
-
-
 - <font color=red>設計🔘單選/多選按鈕</font>
 
 - radio類型表示單選，但是每一個`input`　<mark>內的name屬性要相同</mark> 
@@ -615,6 +613,20 @@ input還有一種是大容量輸入
 
 > button <mark>/區分bottom/ </mark>      img    input
 
+文档流是文档中可显示对象在排列时所占用的位置/空间
+
+例如：块元素自上而下摆放，内联元素，从左到右摆放
+
+标准流里面的限制非常多，导致很多页面效果无法实现
+
+脱离文档流
+
+使⼀个元素脱离标准文档流有三种方式
+
+1. 浮动
+2. 绝对定位
+3. 固定定位
+
 ---
 
 H5的新元素
@@ -670,12 +682,6 @@ CSS 规则由两个主要的部分构成：选择器，以及一条或多条声�
 
 - <font color=red>先不考慮視覺效果，注重邏輯、框架</font> 
 
-
-
-
-
-
-
 ---
 
 #### CSS的使用
@@ -709,4 +715,305 @@ CSS 规则由两个主要的部分构成：选择器，以及一条或多条声�
 
 ```html
 <link rel="stylesheet" type="text/css" href="xxx.css">
+```
+
+---
+
+### CSS實現的關鍵----選擇器
+
+#### 全局選擇器
+
+一般用於初始化 `*{ /**/ }`
+
+#### 元素选择器
+
+适用于所有同类元素 `div{ /**/ }` 
+
+#### 类选择器
+
+用<mark>class属性</mark>区分，比元素选择器更灵活
+
+`.box{ /**/ }     <div class="box"></div> ` 
+
+#### ID选择器
+
+类似类选择器，不多赘述
+
+#### 合并选择器
+
+`选择器1，选择器2...{/**/ }` 
+
+### 关系选择器：
+
+### 伪选择器：    更细化、灵活选择对象
+
+查书 P 173
+
+---
+
+## CSS盒子模型
+
+概念
+
+所有HTML元素可以看作盒子，在CSS中，"box model"这一术语是用来设计和布局时使用
+
+CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：
+
+外边距（margin），边框（border），补白（padding）（内部填充，透明），和实际内容（content）
+
+![](/Users/jolin/Pictures/md.pic.library/盒子模型.png)
+
+### Background- 背景属性
+
+## 文檔流的缺點：
+
+- 高矮不齊，以底邊對齊
+
+- 空格折疊
+  
+  - 利用`white-space` 屬性
+  
+  - 1. **`normal`：** 默认值。合并连续的空白字符，换行符被当作空格处理。文本在有换行符的地方换行，文本中的空格和换行都会被压缩成单个空格。
+       
+       `white-space: normal;`
+    
+    2. **`nowrap`：** 不允许文本换行。文本将在同一行上显示，即使它超过了容器的宽度。
+       
+       `white-space: nowrap;`
+    
+    3. **`pre`：** 保留空白字符，但是不允许文本自动换行。空格和换行符将按照它们的原始样子显示。
+       
+       `white-space: pre;`
+    
+    4. **`pre-wrap`：** 保留空白字符，并允许文本自动换行。
+       
+       `white-space: pre-wrap;`
+    
+    5. **`pre-line`：** 保留空白字符，允许文本自动换行，并且忽略多个空白字符。`white-space: pre-line;` 
+
+- 元素間無空隙
+
+### Float属性
+
+#### Float属性的副作用
+
+- 父级元素高度坍塌
+
+- 后续元素会受到影响
+
+#### 清除浮动方法
+
+1. 为父级元素设定高度
+
+2. Overflow：父级元素添加overflow：  `overflow:hidden;  clear：both;` 
+
+3. 受影响的元素添加clear ： `clear:both;`
+
+4. 伪对象：
+   
+   `.container::after{`
+   
+   `overflow:hidden;`
+   
+   `display:block;`  //display屬性：---> block / inline / inline-block
+   
+   `clear:both;`       // clear属性：清楚浮动
+   
+   `}` 
+
+#### 定位：position
+
+- 相对定位-relative
+
+- 绝对定位-absolute
+  
+  - 脱离文档流,同时会创建一个层级相互覆盖。<mark>每个`position:absolute` 都是一個層級</mark>
+
+- 固定定位-fixed 
+  
+  - 固定，不隨頁面滾動而變化位置
+
+> 其中，绝对定位和固定定位会脱离文档流
+> 
+> **温馨提示** 
+> 
+> 设置定位之后，相对定位和绝对定位他是相对于具有定位的父级元素进行位置调整，如果<mark>父级元素</mark>不存在定位，则继续向上逐级寻找，直到顶层文档
+
+---
+
+## 圆角
+
+使用 CSS3 `border-radius` 属性，你可以给任何元素制作 "圆角"
+
+`border-radius` 属性，可以使用以下规则：
+
+1. 四个值: 第一个值为左上角，第二个值为右上角，第三个值为右下角，第四个值为左下角
+2. 三个值: 第一个值为左上角, 第二个值为右上角和左下角，第三个值为右下角
+3. 两个值: 第一个值为左上角与右下角，第二个值为右上角与左下角
+4. 一个值： 四个圆角值相同
+
+`border-radius` 的子属性
+
+- `border-top-right-radius` 
+
+- `border-bottom-right-radius` 
+
+- `border-top-left-radius` 
+
+- `border-bottom-left-radius` 
+
+### 陰影
+
+---
+
+#### 圖像的居中：
+
+```css
+
+```
+
+---
+
+# Javascript
+
+#### JavaScript输出方式
+
+JavaScript有很多种输出方式，都可以让我们更直观的看到程序运行的结果
+
+```js
+/* 在浏览器中弹出一个对话框,然后把要输出的内容展示出来,
+alert都是把要输出的内容首先转换为字符串然后在输出的*/
+alert("要输出的内容");
+
+document.write("要输出的内容"); 
+
+// 在控制台输出内容
+console.log("要输出的内容");
+```
+
+#### 數據類型：
+
+- number
+
+- string
+
+- boolean
+
+- object
+
+- null
+
+- undefined
+  
+  - ```js
+    console.log(num)
+    //輸出undefined
+    //變量提升，會將num這個變量提升，等價如下
+    
+    var num;
+    console.log(num)
+    ```
+
+#### JS的运算符
+
+- 算术运算符
+
+- 逻辑运算符（同C）
+
+- 字符串运算符
+
+- 算位运算符
+  
+  - `>>` right shift；填充的数字由右移后最左边的数值决定
+  
+  - `>>>` Unsigned right shift；填充的数值一律为`0`  
+
+- 赋值运算符（包含位运算）
+
+- 比较运算符
+
+- 特殊运算符
+  
+  - `,` 逗号运算符，计算两个表达式，返回第二个表达式的值
+  
+  - ```js
+    for(var i=0,j=10;i<=10;i++,j--)
+        a[i,j]=i+j;
+    ·····
+    ·····
+    //增加运算任务
+    ```
+  
+  - `?:` 唯一的三元运算符
+  
+  - ```js
+    var status = age >= 18 ? "adult" : "minor";
+    //当 age 大于等于 18 的时候，将“adult”赋值给 status；
+    //否则将“minor”赋值给 status。
+    ```
+
+
+
+---
+
+### 开发方法收录：
+
+在CSS中，`position` 属性用于指定一个元素的定位方法。以下是 `position` 属性的常见值：
+
+1. `static`: 默认值。元素按照文档流进行定位，不会受到其他定位属性的影响。
+
+```css
+element {
+    position: static;
+}
+```
+
+2. `relative`: 元素相对于其正常位置进行定位，然后通过 `top`、`right`、`bottom` 和 `left` 属性调整位置。
+
+```css
+element {
+    position: relative;
+    top: 10px;
+    left: 20px;
+}
+```
+
+3. `absolute`: 元素相对于最近的非`static`（父级或祖先）定位元素进行定位。如果没有找到非 `static` 定位的元素，则相对于 `html` 元素。
+
+```css
+element {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+}
+```
+
+4. `fixed`: 元素相对于浏览器窗口进行定位，即使页面滚动，元素的位置也不会改变。
+
+```css
+element {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+```
+
+5. `sticky`: 元素根据用户滚动的位置进行定位。它的行为是相对定位和固定定位的混合。
+
+```css
+element {
+    position: sticky;
+    top: 10px;
+}
+```
+
+这些是 `position` 属性的常见值。通过这些值和其他定位属性，你可以实现不同的布局效果。
+
+
+
+#### flex-box居中显示
+
+```css
+
 ```

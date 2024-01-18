@@ -234,13 +234,16 @@ void listcontacts()
         return;
     }
 
+    int cnt = 1;
     contact* current = head;
     printf("\n通讯录列表:\n");
     while (current != NULL) 
     {
+        printf("%d、\n",cnt);
         printf("姓名: %s\n", current->name);
         printf("手机号: %s\n", current->phone);
         printf("关系: %s\n", current->relation);
         current = current->next;
+        cnt++;
     }
 }

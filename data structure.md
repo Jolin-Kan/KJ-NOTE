@@ -491,11 +491,12 @@ R: go to right data
 ### Postorder    ： LRD
 
 > 类比左右支的递归方法---->从下到上
-> 
+
+### 判断是否BST：
+
+（递归）
 
 
-
-### 判断是否BST
 
 
 
@@ -511,6 +512,36 @@ R: go to right data
   
   - > root->left = next node (<mark>skip</mark> the node u want to delete)
 
-- **case 2**: have two child
+- **case 3**: have two child
   
-  - <mark>turn into case 1/2</mark>
+  - <mark>turn into case 1/2</mark> ？？？
+
+
+
+
+
+---
+
+#### 哈夫曼树（huffman tree)
+
+叶子结点含有权重W，其路径为L
+
+WL的求和最小---> 哈夫曼树（不唯一）
+
+#### 哈夫曼树的构造算法
+
+- 将叶子结点按权重由小到大排序
+
+- 最小和次小的结点成为一个结点N1的孩子，N1的权重为孩子的权重和
+
+- 将N1代入原序列排序，重复上述操作
+
+
+
+#### 哈夫曼树构造算法的代码实现
+
+
+
+#### 哈夫曼树的应用：
+
+哈夫曼编码
