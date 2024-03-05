@@ -82,8 +82,6 @@ if(xhr.status >= 200 && xhr.status < 300){
 
     4.`XMLHttpRequest.send()` 发送请求
 
-
-
 ### 设置报文:
 
 #### 行：
@@ -120,8 +118,6 @@ if(xhr.status >= 200 && xhr.status < 300){
 
 - `x = new XMLHttpRequest(); x.abort();`  
 
-
-
 ---
 
 # jQuery 使用Ajax
@@ -130,7 +126,7 @@ if(xhr.status >= 200 && xhr.status < 300){
 
 > ```
 > $("button").click(function(){
->     $.ajax({url:"demo_test.txt",data:{a:100},type:'GET',
+>     $.ajax({url:"test.txt",data:{a:100},type:'GET',
 >     success:function(result){
 >         $("#div1").html(result);//一般是输出
 >     dataType:"Json"
@@ -210,8 +206,6 @@ if(xhr.status >= 200 && xhr.status < 300){
    使用 `app.listen()` 指定服务器要监听的端口号（这里是 8000）。一旦调用了 `listen`，服务器开始监听指定的端口，并在启动时执行回调函数。
 
 这是 Express 框架的入门步骤
-
-
 
 `^c`关闭服务端口
 

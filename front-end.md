@@ -952,8 +952,6 @@ console.log("要输出的内容");
     //否则将“minor”赋值给 status。
     ```
 
-
-
 ---
 
 ### 开发方法收录：
@@ -1010,10 +1008,82 @@ element {
 
 这些是 `position` 属性的常见值。通过这些值和其他定位属性，你可以实现不同的布局效果。
 
+---
 
+---
 
-#### flex-box居中显示
+## 立即执行函数
 
-```css
-
+```js
+for (let i = 0; i <= 5; i++) {
+    arrow[i].addEventListener('click', function (index) {
+        return function () {
+            content[index].style.height = '150px';
+            content[index].style.transition = 'height 1s ease-in-out';
+        };
+    }(i));
+}
 ```
+
+## 样式属性值用在js函数
+
+#### 获取方式不要直接获取
+
+- `window.getComputedStyle(element)`
+
+- ```js
+  let computedStyle = window.getComputedStyle(content[index]);
+              // 获取带有单位的高度
+              let height = computedStyle.getPropertyValue('height');
+              console.log(height);
+  ```
+
+###### `content[index].style.height`
+
+- 直接获取，可能会获取到‘未计算’的值----->空的字符串。
+
+--- 
+
+## Computing style
+
+    声明
+
+    层叠 ----->解决样式冲突
+
+            优先级
+
+                    作者样式！important
+
+                    默认样式！important
+
+                    作者样式
+
+                    默认样式
+
+            特殊性 --->四个数字（？，？，？，？）
+
+                           1️⃣：0/1； 内联样式--->1,其余---->0
+
+                           2️⃣：选择器中ID的数量；
+
+                           3️⃣：类选择器、伪类选择器及属性选择器的数量；
+
+                           4️⃣：元素选择器和伪元素选择器的数量
+
+            原次序
+
+                    以上均一样，后写的覆盖先写的
+
+                    如a:hover,a:active,a:link,a:visited;
+
+    继承
+
+---
+
+
+
+## VUE的框架思想
+
+- 数据响应式
+
+- > 界面在数据更改的时候捕捉到变化并重新渲染相关模块
