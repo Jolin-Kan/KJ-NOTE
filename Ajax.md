@@ -92,7 +92,7 @@ if(xhr.status >= 200 && xhr.status < 300){
 
 - `XMLHttpRequest.setRequestHeader('Content-Type','application/x-www-form-ulencoded)` 
 
-#### 响应体（参数）：
+#### 响应体（参数）`data`：
 
 - `xhr.send(a:100&b=200)`
 

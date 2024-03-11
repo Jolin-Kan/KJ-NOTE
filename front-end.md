@@ -1080,10 +1080,100 @@ for (let i = 0; i <= 5; i++) {
 
 ---
 
-
-
 ## VUE的框架思想
 
 - 数据响应式
 
 - > 界面在数据更改的时候捕捉到变化并重新渲染相关模块
+
+### VUE基础知识
+
+- 模版语法`{{params}}`
+
+- 计算属性
+  
+  - 代替了模版语法中复杂的逻辑运算
+  
+  - ```js
+    <script setup>
+    import { reactive, computed } from 'vue'
+    const author = reactive({
+      name: 'John Doe',
+      books: [
+        'Vue 2 - Advanced Guide',
+        'Vue 3 - Basic Guide',
+        'Vue 4 - The Mystery'
+      ]
+    })
+    // 一个计算属性 ref
+    const publishedBooksMessage = computed(() => {
+      return author.books.length > 0 ? 'Yes' : 'No'
+    })
+    </script>
+    <template>
+      <p>Has published books:</p>
+      <span>{{ publishedBooksMessage }}</span>
+    </template>
+    
+    //函数/方法同理可行
+    punlishedBooksMessages()
+    {
+        return author.books.length > 0 ? 'Yes' : 'No'
+    }
+    ```
+  
+  - **注意**
+    
+    - 计算属性中，此时是属性不是函数/方法；调用不需要加括号，
+      
+      - `{{ publishedBooksMessage }}` 
+    
+    - 计算属性和函数的区别
+      
+      - 在代码未改变的情况下，多次调用，<font color=yellow>计算属性只会渲染/计算一次</font>，而函数/方法会<font color=yellow>多次计算/渲染</font>
+
+- 属性绑定`v-bind:`--->`:attribute`
+
+- 指令
+  
+  - `v-model``v-bind``v-on``v-if``v-show`
+    
+    - 组件
+      
+      - 组件的注册
+        
+        - 全局注册`app.component('MyComponent', MyComponent)`和局部注册
+      
+      - 组件的使用
+        
+        - 构建组件文件`MyComponent.vue`
+        
+        - 父级文件引入 Script部分`import MyComponent from './MyComponent.vue`'
+        
+        - 父级文件挂载组件 `export default{ component{ } }`
+        
+        - 父级文件  显示组件 `<MyComponent />` 
+      
+      - 组件`Props`传递参数（父级到子组件）
+        
+        - ```js
+          //父级组件
+          <template>
+              <h3>parent</h3>
+              <child title = "title"/>
+          </template>
+          <script>
+          import child from "./child.vue"
+          export default{
+              data(){
+              
+              }
+              components:{
+              child
+              }
+          }
+          ```
+      
+      - 组件自定义事件传递参数 （子级到父组件）`this.$emit`
+      
+      > 简单来说：子级设置监听事件，父级操作作为回调函数/操作
