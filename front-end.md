@@ -874,6 +874,36 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：
 
 ---
 
+### CSS 属性技巧用法 归纳总结
+
+
+
+#### 逐帧动画
+
+- 利用`steps()`属性
+
+- `Steps(n,arg)` 
+  
+  - arg : `junmp-start` `jump-end` `jump-both` `jump-none` 
+  
+  - 若不填写arg默认 `jump-start`
+
+- `steps()` 的本质其实是把动画分为 n 个时刻，依次显示，<font color = red>而不是线性显示完整动画 </font> 
+
+
+
+#### 具体使用案例：
+
+- 比如秒针的一秒一格转动
+  
+  - steps（60，junmp-none）
+
+- 若想实时同步，只需要调整最开始的角度即可。
+
+
+
+---
+
 # Javascript
 
 #### JavaScript输出方式
@@ -1080,6 +1110,16 @@ for (let i = 0; i <= 5; i++) {
 
 ---
 
+## 对象Obj
+
+- `Object.keys(Obj)` keys（）方法
+
+- 返回的是`Obj`所有的属性
+
+- `seal()` `freeze()` 方法
+
+---
+
 ## VUE的框架思想
 
 - 数据响应式
@@ -1166,7 +1206,7 @@ for (let i = 0; i <= 5; i++) {
           import child from "./child.vue"
           export default{
               data(){
-              
+          
               }
               components:{
               child

@@ -1,7 +1,5 @@
 # TypeScript 新特性及快速上手
 
-
-
 ## 数据类型
 
 - 类型标注`:` 
@@ -92,12 +90,46 @@ document.body.innerHTML = greeter(user);
 
 ## 类
 
+#### 继承`extend`
 
+```ts
+class Animal {
+    name: string;
+    constructor(theName: string) { this.name = theName; }
+    move(distanceInMeters: number = 0) {
+        console.log(`${this.name} moved ${distanceInMeters}m.`);
+    }
+}
 
+class Snake extends Animal {
+    constructor(name: string) { super(name); }
+    move(distanceInMeters = 5) {
+        console.log("Slithering...");
+        super.move(distanceInMeters);
+    }
+}
+```
 
+#### 注意重新构建的同名函数*必须*调用 `super()`，它会执行基类的构造函数
+
+- 在snake中继承了animal中的`constructor(theName: string) { this.name = theName; }`，而调用`super(name)`是把snake的参数传到animal这个父级中进行操作（此处为赋值）
 
 `public`修饰符是使得类中的成员（对象、方法）可以在类的内部和外部使用，但不是像全局定义那样任何地方都能使用。
 
-
-
 # 
+
+### 函数有关的‘标识’
+
+```ts
+function identity:<T>(arg:T):T{
+    ....
+}
+```
+
+#### 在identity函数中
+
+- 第一个`:<T>`代表给函数传递一个类型参数，这个类型参数的值随传入的参数的类型变化而变化。
+
+- 第二个`:T` 表示传入的参数是‘T’类型，由于T是可以自适应变化，也称之为 **泛型**
+
+- 第三个`:T`表示函数返回的内容是T类型
