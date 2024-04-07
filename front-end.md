@@ -876,8 +876,6 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：
 
 ### CSS 属性技巧用法 归纳总结
 
-
-
 #### 逐帧动画
 
 - 利用`steps()`属性
@@ -890,8 +888,6 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：
 
 - `steps()` 的本质其实是把动画分为 n 个时刻，依次显示，<font color = red>而不是线性显示完整动画 </font> 
 
-
-
 #### 具体使用案例：
 
 - 比如秒针的一秒一格转动
@@ -900,7 +896,9 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：
 
 - 若想实时同步，只需要调整最开始的角度即可。
 
+---
 
+## Flip 动画
 
 ---
 
@@ -984,6 +982,197 @@ console.log("要输出的内容");
 
 ---
 
+## Js数组方法
+
+#### Sort( <font color = yellow>compareFunction</font>)
+
+- 比较函数 `compareFunction` 的作用是指定数组元素的排序顺序。当 `compareFunction` 返回值为负数时，表示 `a` 应该排在 `b` 的前面，即升序排序；当返回值为零时，表示 `a` 和 `b` 相等，它们的相对顺序不变；当返回值为正数时，表示 `a` 应该排在 `b` 的后面，即降序排序。
+
+- ```js
+  sort((a,b) => a-b); //表示升序 
+  ```
+  
+  - a,b为默认排序；若a < b, a - b < 0,a在b前;若a=b, a - b = 0,不变，a仍在b前;若a > b, a-b > 0,b在a的前面
+
+- ```js
+  同理：降序
+  sort((a,b)=> b-a);
+  ```
+
+---
+
+### this
+
+> this是函数的自由变量
+
+#### 三种判断方法
+
+1. 通过`new`创建. `this`指向創建對象
+   
+   ```js
+   function Person(name)
+   {
+       this.name=name;
+   }
+   const person = new Person('Alice');
+   console.log(person.name);//輸出 ‘Alice’
+   ```
+
+2. 显式绑定，通过`call`/`bind`/`apply`方法添加
+   
+   ```js
+   const liu = {name:‘张飞’}
+   function person(){
+       console.log(this.name);
+   };
+   
+   person.call(liu); //输出 ‘张飞’
+   ```
+
+3. 隐式绑定，在对象中创建
+   
+   ```js
+   const zhang = {
+       name:'张飞';
+       sayhello(){
+           console.log(`你好,${this.name}`);
+       }
+   }
+   zhang.sayhello(); //输出 ‘张飞’
+   ```
+
+### this 的简单使用
+
+- 创建一个有三个方法的 `calculator` 对象：
+  
+  - `read()` 提示输入两个值，并将其保存为对象属性，属性名分别为 `a` 和 `b`。
+  - `sum()` 返回保存的值的和。
+  - `mul()` 将保存的值相乘并返回计算结果。
+
+```js
+let calculator = {
+  // ……你的代码……
+  sum() {
+    return this.a + this.b;
+  },
+
+  mul() {
+    return this.a * this.b;
+  },
+
+  read() {
+    this.a = +prompt('a?', 0); 
+    this.b = +prompt('b?', 0);
+  }
+};
+
+calculator.read();
+alert( calculator.sum() );
+alert( calculator.mul() ); 
+```
+
+> `prompt`是一个`WebApi` 指示浏览器显示一个对话框，其中有一个可选的信息，提示用户输入一些文本，并等待用户提交文本或取消对话框。
+
+```js
+prompt()
+prompt(message)
+prompt(message, defaultValue)
+```
+
+#### Promise
+
+> 是一种构造函数，用于异步编程
+
+### 基本构成
+
+- promise本体
+
+- then方法（对promise内部操作反馈）
+
+### 基础格式
+
+```js
+let p = new Promise((resolve,reject)=>{
+    if(success)
+    {
+       resolve(value); //value传入resolve，在then中使用（在then中以value使用）
+    }
+    if(fail)
+    {
+      reject(reason);
+    }
+});
+
+
+p.then(
+    value => {};
+    reason => {};   
+)
+```
+
+### Async函数
+
+```js
+async function main(){
+    //1.return 一个非promise类型的数据
+    return 555; //ret 就为 555
+    //2. return promise类型且状态为成功
+    return p = new Promise((resolve,reject)=>{
+        resolve('ok');
+    })
+    //ret 是一个状态为成功的promise类型
+    //3. return promise类型且状态为失败
+    return p = new Promise((resolve,reject)=>{
+        reject('Error');
+    })
+    //ret 是一个状态为失败的promise类型
+}
+let ret = main();
+console.log(ret);
+```
+
+### Await表达式
+
+> Await只有在Async函数内有效，否则报错
+
+- await 右侧为promise以外的数据类型：
+  
+  - 原样返回
+
+- await 右侧为promise类型
+  
+  - promise状态为成功
+    
+    - 返回promise成功返回的<font color = red>值</font> 
+    
+    - ```js
+      async function main(){
+          let p = new Promise((resolve,reject)=>{
+              resolve('OK');
+          })
+          await p;
+      }
+      ```
+  
+  - Promise状态为失败
+    
+    - 利用`try..catch` 返回promise失败的值
+    
+    - ```js
+      async functioon main(){
+          let p = new promise((resolve,reject) =>{
+              reject('Error');
+          });
+          try{
+              let ret = await p
+          }catch(e){
+                  console.log(e);
+              }    
+      }
+      ```
+
+---
+
 ### 开发方法收录：
 
 在CSS中，`position` 属性用于指定一个元素的定位方法。以下是 `position` 属性的常见值：
@@ -1055,7 +1244,7 @@ for (let i = 0; i <= 5; i++) {
 }
 ```
 
-## 样式属性值用在js函数
+## 样式属性值在js函数的使用
 
 #### 获取方式不要直接获取
 
@@ -1073,6 +1262,43 @@ for (let i = 0; i <= 5; i++) {
 - 直接获取，可能会获取到‘未计算’的值----->空的字符串。
 
 --- 
+
+## 属性描述符
+
+> 通常搭配`get`/`set` 读取器和寄存器使用----->訪問器
+
+- 设置`属性描述符`
+  
+  - ```js
+    Object.defineProperty(obj, propertyName, descriptor)
+    //descriptor 是一个对象
+    
+    
+    ```
+
+-  同时设置多个属性属性描述符 `object.defineProperties` 
+  
+  - ```js
+    Object.defineProperties(obj, {
+      prop1: descriptor1,
+      prop2: descriptor2
+      // ...
+    });
+    ```
+
+- 读取`属性描述符`信息
+  
+  - ```js
+    let descriptor = Object.getOwnPropertyDescriptor(obj, propertyName);
+    ```
+
+#### 訪問器
+
+```js
+
+```
+
+
 
 ## Computing style
 
@@ -1172,7 +1398,7 @@ for (let i = 0; i <= 5; i++) {
       
       - 在代码未改变的情况下，多次调用，<font color=yellow>计算属性只会渲染/计算一次</font>，而函数/方法会<font color=yellow>多次计算/渲染</font>
 
-- 属性绑定`v-bind:`--->`:attribute`
+- 属性绑定`v-bind:`--->`:attribute` 
 
 - 指令
   
@@ -1217,3 +1443,5 @@ for (let i = 0; i <= 5; i++) {
       - 组件自定义事件传递参数 （子级到父组件）`this.$emit`
       
       > 简单来说：子级设置监听事件，父级操作作为回调函数/操作
+
+---
