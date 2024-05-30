@@ -38,6 +38,79 @@ So ADT is a general project / idea
 
 when it comes to achieve it, we can use different ways with programing language to make it.
 
+---
+
+### Sequal list
+
+> linear continuous
+
+#### Achieve SeqList in C
+
+> The structure, insert func , delete func , find func
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100 // 顺序表的最大长度
+
+typedef int ElementType; // 定义元素类型
+
+typedef struct {
+    ElementType data[MAX_SIZE]; // 存储元素的数组
+    int length; // 顺序表的当前长度
+} SeqList;
+
+// 初始化顺序表
+void InitList(SeqList *L) {
+    L->length = 0;
+}
+
+// 打印顺序表
+void PrintList(SeqList *L) {
+    for (int i = 0; i < L->length; i++) {
+        printf("%d ", L->data[i]);
+    }
+    printf("\n");
+}
+
+// 插入元素
+int Insert(SeqList *L, int pos, ElementType elem) {
+    if (pos < 0 || pos > L->length || L->length == MAX_SIZE) {
+        return 0; // 插入位置不合法或顺序表已满
+    }
+    for (int i = L->length; i > pos; i--) {
+        L->data[i] = L->data[i - 1]; // 元素后移
+    }
+    L->data[pos] = elem;
+    L->length++;
+    return 1; // 插入成功
+}
+
+// 删除元素
+int Delete(SeqList *L, int pos) {
+    if (pos < 0 || pos >= L->length) {
+        return 0; // 删除位置不合法
+    }
+    for (int i = pos; i < L->length - 1; i++) {
+        L->data[i] = L->data[i + 1]; // 元素前移
+    }
+    L->length--;
+    return 1; // 删除成功
+}
+
+// 查找元素
+int Find(SeqList *L, ElementType elem) {
+    for (int i = 0; i < L->length; i++) {
+        if (L->data[i] == elem) {
+            return i; // 返回元素位置
+        }
+    }
+    return -1; // 未找到元素
+}
+
+```
+
 ## linked list:
 
 ![](/Users/jolin/Pictures/md.pic.library/linked%20list.png)
@@ -50,7 +123,7 @@ when it comes to achieve it, we can use different ways with programing language 
 
 ## Advantages of linked list
 
-1. **Dynamic RAM assign**: no need to assign memory before enter data
+1. <font color = lightgreen>**Dynamic RAM assign**</font>: no need to assign memory before enter data
 
 2. **Discontinuous storage**: elements are stored in different location in memory. No contiguous blocks of memory are required.//
 
@@ -262,9 +335,61 @@ void insertNode(struct Node** head, int data) {
 
 ## Make a stack with array/linked list
 
-> array
+> Linked list
 > 
 > ```c
+> #include <stdio.h>
+> #include <stdlib.h>
+> 
+> // 定义链表节点结构
+> typedef struct Node {
+>     int data;            // 数据域
+>     struct Node* next;   // 指针域，指向下一个节点
+> } Node;
+> 
+> // 定义栈结构
+> typedef struct {
+>     Node* top;           // 栈顶指针
+> } Stack;
+> // 初始化栈
+> void InitStack(Stack* s) {
+>     s->top = NULL; // 栈顶指针初始化为NULL
+> }
+> // 压入元素到栈
+> void Push(Stack* s, int value) {
+>     Node* newNode = (Node*)malloc(sizeof(Node)); // 动态分配新节点
+>     if (newNode == NULL) {
+>         printf("Memory allocation failed\n");
+>         return;
+>     }
+>     newNode->data = value;    // 设置新节点的数据
+>     newNode->next = s->top;   // 新节点的下一个指向当前栈顶
+>     s->top = newNode;         // 栈顶指针指向新节点
+> }
+> // 从栈中弹出元素
+> int Pop(Stack* s) {
+>     if (s->top == NULL) { // 栈空检查
+>         printf("Stack is empty\n");
+>         return -1; // 返回-1表示栈为空
+>     }
+>     Node* temp = s->top;      // 临时保存当前栈顶节点
+>     int value = temp->data;   // 获取栈顶节点的数据
+>     s->top = s->top->next;    // 栈顶指针指向下一个节点
+>     free(temp);               // 释放栈顶节点内存
+>     return value;             // 返回弹出的数据
+> }
+> // 检查栈是否为空
+> int IsEmpty(Stack* s) {
+>     return s->top == NULL; // 如果栈顶指针为NULL，则栈为空
+> }
+> // 获取栈顶元素
+> int Peek(Stack* s) {
+>     if (s->top == NULL) { // 栈空检查
+>         printf("Stack is empty\n");
+>         return -1; // 返回-1表示栈为空
+>     }
+>     return s->top->data; // 返回栈顶元素
+> }
 > 
 > ```
 
@@ -496,10 +621,6 @@ R: go to right data
 
 （递归）
 
-
-
-
-
 ### Delete a Node of the Binary search tree
 
 - **case 1**: the node have no child
@@ -515,10 +636,6 @@ R: go to right data
 - **case 3**: have two child
   
   - <mark>turn into case 1/2</mark> ？？？
-
-
-
-
 
 ---
 
@@ -536,11 +653,7 @@ WL的求和最小---> 哈夫曼树（不唯一）
 
 - 将N1代入原序列排序，重复上述操作
 
-
-
 #### 哈夫曼树构造算法的代码实现
-
-
 
 #### 哈夫曼树的应用：
 

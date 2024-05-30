@@ -896,11 +896,40 @@ CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：
 
 - 若想实时同步，只需要调整最开始的角度即可。
 
+### Flex + margin
+
+- `margin:auto` 实际是将剩余方向的空间全部占据
+
 ---
 
 ## Flip 动画
 
 ---
+
+### 妙用选择器
+
+#### `-within`
+
+> 一般用于伪类触发，可以使得该元素后代触发也生效
+
+```css
+div:focus-within{
+    ....
+}
+```
+
+> 比如div等元素不能focus，其子元素表单focus也能触发选择器
+
+### `:has()`
+
+> 用于给选择其增加附加条件
+
+```css
+div:has(+input[required){
+
+}
+表示选中有一个required类的input元素的div
+```
 
 # Javascript
 
@@ -1229,6 +1258,12 @@ element {
 
 ---
 
+## 头像上传
+
+- 如何实现本地预览
+
+- 如何实现图像的部分上传
+
 ---
 
 ## 立即执行函数
@@ -1272,17 +1307,19 @@ for (let i = 0; i <= 5; i++) {
   - ```js
     Object.defineProperty(obj, propertyName, descriptor)
     //descriptor 是一个对象
+    ```
     
+    ```
     
     ```
 
--  同时设置多个属性属性描述符 `object.defineProperties` 
+- 同时设置多个属性属性描述符 `object.defineProperties` 
   
   - ```js
     Object.defineProperties(obj, {
-      prop1: descriptor1,
-      prop2: descriptor2
-      // ...
+     prop1: descriptor1,
+     prop2: descriptor2
+     // ...
     });
     ```
 
@@ -1297,8 +1334,6 @@ for (let i = 0; i <= 5; i++) {
 ```js
 
 ```
-
-
 
 ## Computing style
 
@@ -1443,5 +1478,42 @@ for (let i = 0; i <= 5; i++) {
       - 组件自定义事件传递参数 （子级到父组件）`this.$emit`
       
       > 简单来说：子级设置监听事件，父级操作作为回调函数/操作
+
+---
+
+### DOM操作
+
+- VUE抽象出了常用的dom操作
+  
+  - 内容改变`{{模版语法}}`
+  
+  - 属性改变 `V-bind:`指令
+  
+  - 事件 `V-on:click`指令
+
+###### 尽管如此，仍能通过`ref`直接对底层DOM操作
+
+```js
+<template>
+    <div ref="container" class="container">{{content}}</div>
+    <button @click="getElement">获取container元素</button>
+</template>
+<script>
+    export default{
+        data(){
+          content:"內容",
+        },
+        methods:{
+            getElement(){
+                this.$refs.container.innerHTML = '改變了'
+            }
+        }        
+    }
+</script>
+```
+
+通过`ref`属性和`this.$refs.name`获取到dom元素，之后就是js原生操作
+
+### 注意：非必要不操作DOM，性能消耗大
 
 ---
