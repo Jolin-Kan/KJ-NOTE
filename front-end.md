@@ -1200,6 +1200,144 @@ console.log(ret);
       }
       ```
 
+##### `async` `await`在请求中的例子
+
+`Response` 对象提供了一系列属性和方法，用于处理 HTTP 响应。以下是 `Response` 对象的一些常用属性和方法：
+
+示例代码
+
+```javascript
+const url = 'http://localhost:7010/chat';
+
+async function getResponse(content) {
+    try {
+        // 发送 POST 请求
+        const resp = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ content })
+        });
+
+        console.log('123');
+        const data = await resp.text();
+        console.log(data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+// 使用示例
+getResponse('Hello, this is a test message!');
+```
+
+`第一个await用于等待响应头的传输``第二个await用于等待响应体的传输`
+
+### 属性
+
+1. **`type`**
+   
+   - 描述响应的类型（`basic`, `cors`, `default`, `error`, `opaque`, 或 `opaqueredirect`）。
+
+2. **`url`**
+   
+   - 包含响应的 URL。
+
+3. **`redirected`**
+   
+   - 一个布尔值，表示是否从另一个 URL 重定向到此响应。
+
+4. **`status`**
+   
+   - HTTP 状态码（例如，200 表示成功）。
+
+5. **`ok`**
+   
+   - 一个布尔值，表示响应状态是否在 200 到 299 之间。
+
+6. **`statusText`**
+   
+   - 状态消息对应状态码（例如，OK 对应 200）。
+
+7. **`headers`**
+   
+   - 包含响应头信息的 `Headers` 对象。
+
+### 方法
+
+1. **`clone()`**
+   
+   - 创建一个新的 `Response` 对象，它是当前响应对象的副本。
+
+2. **`error()`**
+   
+   - 返回一个新的 `Response` 对象，表示网络错误。
+
+3. **`redirect(url, status)`**
+   
+   - 创建一个新的重定向 `Response` 对象，`url` 是目标 URL，`status` 是状态码。
+
+4. **`arrayBuffer()`**
+   
+   - 返回一个 `Promise`，解析为一个 `ArrayBuffer`，表示响应体的原始二进制数据。
+
+5. **`blob()`**
+   
+   - 返回一个 `Promise`，解析为一个 `Blob` 对象，表示响应体的数据。
+
+6. **`formData()`**
+   
+   - 返回一个 `Promise`，解析为一个 `FormData` 对象，表示响应体的数据。
+
+7. **`json()`**
+   
+   - 返回一个 `Promise`，解析为一个 JavaScript 对象，这个对象是通过解析响应体的 JSON 文本得到的。
+
+8. **`text()`**
+   
+   - 返回一个 `Promise`，解析为一个字符串，表示响应体的文本。
+
+9. **`body`**
+   
+   - 返回一个 `ReadableStream`，表示响应体的数据流。
+   
+   - 可以用于实现请求的流式传输，避免用户端等待过长
+     
+     - 示例
+     
+     - ```js
+       const url = 'http://localhost:7010/chat';
+       
+       async function getResponse(content) {
+           try {
+               // 发送 POST 请求
+               const resp = await fetch(url, {
+                   method: 'POST',
+                   headers: {
+                       'Content-Type': 'application/json'
+                   },
+                   body: JSON.stringify({ content })
+               });
+               //const data = await resp.text();
+               constr reader = resp.body.getReader();
+               const decoder = new TextDecoder();
+               while(1)
+               {
+                 const {done,value} = await reader.read()
+                 if(done)
+                 {
+                   break;
+                 }
+                 const txt = decoder.decode(value)
+                 //對txt的處理.....
+                 console.log(txt);
+               }
+           } catch (error) {
+               console.error('Error:', error);
+           }
+       }
+       ```
+
 ---
 
 ### 开发方法收录：
@@ -1384,14 +1522,32 @@ for (let i = 0; i <= 5; i++) {
 ## VUE的框架思想
 
 - 数据响应式
+  
+  - > 当数据变化的时候，依赖数据的函数重新运行
+    
+    常见界面数据更新其实就是`_data`内部属性的`getter`、`setter`重新运行
 
-- > 界面在数据更改的时候捕捉到变化并重新渲染相关模块
+- #### MVVM模型
+  
+  - `Model`对应 data的数据
+  
+  - `View`对应 视图模版
+  
+  - `ViewMode` Vue 实例对象 连接`Model`和`View`
+    
+    - `VM`根据`Model`在`View`上渲染数据
+
+- 数据代理
+  
+  - 就是将`VM`将数据加工放入vue中，实现对数据的监测从而实现数据响应式
 
 ### VUE基础知识
 
 - 模版语法`{{params}}`
 
-- 计算属性
+- 计算属性（简写）
+  
+  - 利用现有的属性去<font color = lightgreen>计算得出</font>全新的属性
   
   - 代替了模版语法中复杂的逻辑运算
   
@@ -1432,52 +1588,156 @@ for (let i = 0; i <= 5; i++) {
     - 计算属性和函数的区别
       
       - 在代码未改变的情况下，多次调用，<font color=yellow>计算属性只会渲染/计算一次</font>，而函数/方法会<font color=yellow>多次计算/渲染</font>
-
-- 属性绑定`v-bind:`--->`:attribute` 
-
-- 指令
   
-  - `v-model``v-bind``v-on``v-if``v-show`
+  ---
+  
+  ### 属性绑定`v-bind:`--->`:attribute`
+
+- Class绑定
+  
+  - 字符串写法 --适用于类名不确定，需要动态指定
+  
+  - 数组写法 --适用于绑定的个数不确定、类名也不确定
+  
+  - 对象写法 --适用于绑定的个数、名字确定，但动态决定是否绑定
+
+- Style绑定
+  
+  - 类似Class绑定
+
+### 指令
+
+- `v-model``v-bind``v-on``v-if``v-show`
+
+- 自定义指令`directives`
+  
+  在VM中的一个属性
+  
+  - 函数式：
+  
+  ```ts
+  let vm = new vue({
+   directives(){
+      /*name实际是一个函数
+      *1、绑定时调用
+      *2、所在模版重新解析时调用
+      */
+      name(element,binding){
+          //element使用组件的元素
+          //binding是绑定的
+          //原生DOM操作
+      }
+   }
+  })
+  ```
+  
+  - 函数式的组件有一个缺点，不能精准控制代码执行的时候（组件挂载后、模版解析后......)
+  
+  - ##### 对象式：
+  
+  ```js
+  let vm = new vue({
+   directives(){
+    name:{
+      //元素与指令绑定时执行
+      bind(){}
+      //指令所在元素被解析道页面时
+      inserted(){}
+      //指令所在模版重新解析时
+      update(){}
+   }
+  })
+  ```
+  
+  - 函数式和对象式的区别
+  
+  - 函数式相当于简写，只写了`bind()`和`update`
+  
+  - 在一些对执行时机有特殊要求的情况下再写对象式
     
-    - 组件
-      
-      - 组件的注册
-        
-        - 全局注册`app.component('MyComponent', MyComponent)`和局部注册
-      
-      - 组件的使用
-        
-        - 构建组件文件`MyComponent.vue`
-        
-        - 父级文件引入 Script部分`import MyComponent from './MyComponent.vue`'
-        
-        - 父级文件挂载组件 `export default{ component{ } }`
-        
-        - 父级文件  显示组件 `<MyComponent />` 
-      
-      - 组件`Props`传递参数（父级到子组件）
-        
-        - ```js
-          //父级组件
-          <template>
-              <h3>parent</h3>
-              <child title = "title"/>
-          </template>
-          <script>
-          import child from "./child.vue"
-          export default{
-              data(){
-          
-              }
-              components:{
-              child
+    - `focus`、獲取父元素....
+  
+  #### 组件
+  
+  - 组件的注册
+    
+    - 全局注册`app.component('MyComponent', MyComponent)` 
+    - 局部注册 在VM的配置对象中`components:{componenta:componenta}`
+  
+  - 组件的创建
+    
+    - ```js
+      const componenta = vue.extend({
+          //组件配置对象 和vm的配置对象几乎相同
+          template:`
+          //组件的html结构
+          `,
+          data(){
+              return{
+              key:value
               }
           }
-          ```
+      })
+      ```
       
-      - 组件自定义事件传递参数 （子级到父组件）`this.$emit`
+      组件的使用
+    
+    - 构建组件文件`MyComponent.vue`
+    
+    - 父级文件引入 Script部分`import MyComponent from './MyComponent.vue`'
+    
+    - 父级文件挂载组件 `export default{ component{ } }`
+    
+    - 父级文件  显示组件 `<MyComponent />` 
+
+- 单文件组件的创建
+  
+  ```js
+  <template>
+  //组件的结构
+  </template>
+  
+  <script>
+  //交互（数据方法、、、）
+  name:"name",
+  expiort default {
+      data(){
+          return{}
+      },
+      method:{
+          a(){... `}
+      }
+  }
+  </script>
+  
+  <style>
+  
+  </style>
+  ```
+  
+  - 组件`Props`传递参数（父级到子组件）
+    
+    - ```js
+      //父级组件
+      <template>
+          <h3>parent</h3>
+          <child title = "title"/>
+      </template>
+      <script>
+      import child from "./child.vue"
+      export default{
+          data(){
       
-      > 简单来说：子级设置监听事件，父级操作作为回调函数/操作
+          }
+          components:{
+          child
+          }
+      }
+      ```
+  
+  - 组件自定义事件传递参数 （子级到父组件）`this.$emit`
+  
+  > 简单来说：子级设置监听事件，父级操作作为回调函数/操作
 
 ---
 

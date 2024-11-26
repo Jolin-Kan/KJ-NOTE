@@ -108,7 +108,6 @@ int Find(SeqList *L, ElementType elem) {
     }
     return -1; // 未找到元素
 }
-
 ```
 
 ## linked list:
@@ -390,7 +389,6 @@ void insertNode(struct Node** head, int data) {
 >     }
 >     return s->top->data; // 返回栈顶元素
 > }
-> 
 > ```
 
 ---

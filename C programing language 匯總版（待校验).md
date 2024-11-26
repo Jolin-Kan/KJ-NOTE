@@ -131,6 +131,10 @@ p = Func;          /*将Func函数的首地址赋给指针变量p*/
 ```
 
 > I need to further studying to figure out why its significant.
+> 
+> 函数指针可以理解为给函数创建了一个别名，使得在函数的作用域利用 别名调用函数
+> 
+> 但函数指针精妙之处在于可以在程序运行的时候改变函数指针指向的函数从而改变执行的函数
 
 ---
 
